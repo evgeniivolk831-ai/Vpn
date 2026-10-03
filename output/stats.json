@@ -1,0 +1,21 @@
+{
+  "name": "GlobalPulse VLESS",
+  "sources": {
+    "Au1rxx-v2ray-base64": {
+      "ok": true,
+      "nodes": 1548
+    },
+    "zengfr-vless": {
+      "ok": true,
+      "nodes": 0
+    },
+    "zengfr-all": {
+      "ok": true,
+      "nodes": 0
+    }
+  },
+  "unique_nodes": 1440,
+  "vless_nodes": 100,
+  "published_all": 100,
+  "published_vless": 100
+}
