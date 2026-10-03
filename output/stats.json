@@ -1,21 +1,33 @@
 {
   "name": "GlobalPulse VLESS",
+  "policy": "verified-upstream-only",
   "sources": {
-    "Au1rxx-v2ray-base64": {
+    "Au1rxx-verified": {
       "ok": true,
-      "nodes": 1548
+      "nodes": 1548,
+      "url": "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt"
     },
-    "zengfr-vless": {
+    "0xRadikal-verified": {
       "ok": true,
-      "nodes": 0
+      "nodes": 1305,
+      "url": "https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/verified/configs_base64.txt"
     },
-    "zengfr-all": {
+    "morpheus-best": {
       "ok": true,
-      "nodes": 0
+      "nodes": 2000,
+      "url": "https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt"
+    },
+    "dfantomasd-karing": {
+      "ok": true,
+      "nodes": 16,
+      "url": "https://dfantomasd.github.io/MyVPN-subscription/public/karing.txt"
     }
   },
-  "unique_nodes": 1440,
-  "vless_nodes": 100,
-  "published_all": 100,
-  "published_vless": 100
+  "unique_nodes": 4701,
+  "vless_nodes": 150,
+  "published_all": 200,
+  "published_vless": 150,
+  "local_auto_selection": true,
+  "local_healthcheck_interval_seconds": 180,
+  "note": "Upstream CI verification cannot prove reachability from every ISP. The generated Clash/Mihomo profile re-tests nodes from the user's network and auto-selects a live one."
 }

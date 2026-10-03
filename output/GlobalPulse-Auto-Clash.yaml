@@ -1,0 +1,46 @@
+mixed-port: 7890
+mode: rule
+allow-lan: false
+log-level: warning
+
+proxy-providers:
+  GlobalPulse:
+    type: http
+    url: "https://raw.githubusercontent.com/evgeniivolk831-ai/Vpn/main/output/GlobalPulse-Base64.txt"
+    interval: 900
+    path: ./providers/globalpulse.txt
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 180
+      timeout: 5000
+      lazy: false
+
+proxy-groups:
+  - name: "GlobalPulse AUTO"
+    type: url-test
+    use:
+      - GlobalPulse
+    url: https://www.gstatic.com/generate_204
+    interval: 180
+    tolerance: 80
+    lazy: false
+
+  - name: "GlobalPulse FAILOVER"
+    type: fallback
+    use:
+      - GlobalPulse
+    url: https://www.gstatic.com/generate_204
+    interval: 120
+    timeout: 5000
+    lazy: false
+
+  - name: "PROXY"
+    type: select
+    proxies:
+      - "GlobalPulse AUTO"
+      - "GlobalPulse FAILOVER"
+      - DIRECT
+
+rules:
+  - MATCH,PROXY
