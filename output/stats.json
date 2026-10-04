@@ -39,7 +39,7 @@
   "clash_convertible_vless": 72,
   "published_all": 200,
   "published_vless": 72,
-  "published_v2rayng": 50,
+  "published_v2rayng": 45,
   "local_auto_selection": true,
   "local_healthcheck_interval_seconds": 180,
   "failover_interval_seconds": 120,
