@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # scripts/e2e_vless_check.py
-# E2E coverage: VLESS TCP/WS/gRPC/HTTPUpgrade with none/TLS/Reality security.
+# E2E coverage: VLESS RAW/TCP/WS/gRPC/HTTPUpgrade/H2/XHTTP with none/TLS/Reality.
 import argparse
 import json
 import socket
@@ -20,8 +20,10 @@ ATTEMPTS = 3
 TIMEOUT_SECONDS = 8
 WORKERS = 8
 BASE_PORT = 21000
-SUPPORTED_NETWORKS = {"tcp", "ws", "grpc", "httpupgrade"}
-SUPPORTED_SECURITY = {"none", "tls", "reality"}
+
+SUPPORTED_NETWORKS = {"tcp", "raw", "ws", "grpc", "httpupgrade", "h2", "http", "xhttp"}
+SUPPORTED_SECURITY = {"none", "reality", "tls"}
+REALITY_NETWORKS = {"tcp", "raw", "grpc", "xhttp"}
 
 
 def parse_vless(uri: str) -> dict | None:
@@ -29,18 +31,34 @@ def parse_vless(uri: str) -> dict | None:
         p = urllib.parse.urlparse(uri.strip())
         if p.scheme.lower() != "vless" or not p.hostname or not p.port or not p.username:
             return None
-        q = urllib.parse.parse_qs(p.query)
-        get = lambda k: urllib.parse.unquote(q[k][0]) if q.get(k) else None
+
+        q = urllib.parse.parse_qs(p.query, keep_blank_values=True)
+
+        def get(key: str) -> str | None:
+            values = q.get(key)
+            return urllib.parse.unquote(values[0]) if values else None
+
         security = (get("security") or "none").lower()
-        network = (get("type") or "tcp").lower()
+        network = (get("type") or "tcp").lower().split("?", 1)[0]
+
+        if network == "websocket":
+            network = "ws"
+        if network == "raw":
+            network = "tcp"
+
         if security not in SUPPORTED_SECURITY or network not in SUPPORTED_NETWORKS:
             return None
-        if security == "reality" and (not get("pbk") or not get("sni")):
+
+        if security == "reality":
+            if network not in REALITY_NETWORKS or not get("pbk") or not get("sni"):
+                return None
+        elif security == "tls" and not get("sni"):
             return None
-        if security == "tls" and not get("sni"):
-            return None
-        if network == "grpc" and not get("serviceName"):
-            return None
+
+        if network == "xhttp" and not (get("path") or get("mode") or get("xPaddingBytes")):
+            # XHTTP commonly has an empty/default path, so do not reject a valid URI.
+            pass
+
         return {
             "address": p.hostname,
             "port": p.port,
@@ -54,7 +72,9 @@ def parse_vless(uri: str) -> dict | None:
             "security": security,
             "path": get("path") or "/",
             "host": get("host") or get("sni") or p.hostname,
-            "serviceName": get("serviceName") or "",
+            "serviceName": get("serviceName") or get("service_name") or "",
+            "mode": get("mode") or "auto",
+            "authority": get("authority") or get("host") or get("sni") or p.hostname,
         }
     except (ValueError, TypeError):
         return None
@@ -79,6 +99,16 @@ def build_stream_settings(parsed: dict) -> dict:
         stream["httpupgradeSettings"] = {
             "path": parsed["path"],
             "host": parsed["host"],
+        }
+    elif network in {"h2", "http"}:
+        stream["httpSettings"] = {
+            "path": parsed["path"],
+            "host": [parsed["host"]],
+        }
+    elif network == "xhttp":
+        stream["xhttpSettings"] = {
+            "path": parsed["path"],
+            "mode": parsed["mode"],
         }
 
     if security == "tls":
@@ -265,13 +295,18 @@ def main() -> int:
         "attempts_per_target": ATTEMPTS,
         "supported_networks": sorted(SUPPORTED_NETWORKS),
         "supported_security": sorted(SUPPORTED_SECURITY),
+        "reality_supported_networks": sorted(REALITY_NETWORKS),
         "tested": len(results),
         "e2e_pass": sum(r["status"] == "E2E_PASS" for r in results),
         "e2e_fail": sum(r["status"] == "E2E_FAIL" for r in results),
         "unsupported": sum(r["status"] == "UNSUPPORTED" for r in results),
+        "xray_start_failed": sum(r["status"] == "XRAY_START_FAILED" for r in results),
         "results": results,
     }
-    Path(args.output).write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    Path(args.output).write_text(
+        json.dumps(summary, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
     print(json.dumps({k: summary[k] for k in summary if k != "results"}, ensure_ascii=False))
     return 0
 
