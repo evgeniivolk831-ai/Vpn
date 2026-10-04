@@ -1,6 +1,6 @@
 {
   "name": "GlobalPulse VLESS",
-  "policy": "verified-upstream-only",
+  "policy": "tcp-reachable-first-local-auto",
   "sources": {
     "Au1rxx-verified": {
       "ok": true,
@@ -9,7 +9,7 @@
     },
     "0xRadikal-verified": {
       "ok": true,
-      "nodes": 1425,
+      "nodes": 1496,
       "url": "https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/verified/configs_base64.txt"
     },
     "morpheus-best": {
@@ -23,9 +23,11 @@
       "url": "https://dfantomasd.github.io/MyVPN-subscription/public/karing.txt"
     }
   },
-  "unique_nodes": 4789,
+  "unique_nodes": 4862,
   "vless_nodes": 120,
   "candidate_vless": 300,
+  "tcp_checked_vless": 300,
+  "tcp_reachable_vless": 294,
   "published_keys_target": 120,
   "subscription": "output/GlobalPulse-Subscription.txt",
   "mihomo_subscription": "output/GlobalPulse-Subscription.yaml",
@@ -35,5 +37,5 @@
   "local_auto_selection": true,
   "local_healthcheck_interval_seconds": 180,
   "failover_interval_seconds": 120,
-  "note": "Upstream source verification is not equivalent to reachability from every ISP. Mihomo performs local HTTP health checks and automatic failover from the user's network."
+  "note": "TCP reachability filtering is a pre-publication gate; it is not equivalent to full VLESS/TLS/Reality end-to-end verification. from every ISP. Mihomo performs local HTTP health checks and automatic failover from the user's network."
 }
