@@ -1,0 +1,19 @@
+GlobalPulse v2rayNG — curated local-test pool
+
+Subscription URL:
+https://raw.githubusercontent.com/evgeniivolk831-ai/Vpn/main/output/GlobalPulse-v2rayNG.txt
+
+Pool size target: 50
+The feed is a curated subset of the E2E-verified pool, ranked by measured latency.
+
+Recommended v2rayNG settings:
+1. Enable automatic subscription update.
+2. Enable Auto test after updating subscription.
+3. Enable Auto sort after testing.
+4. Enable Auto delete invalid config after testing only if you accept removing failed profiles.
+5. Create a Policy group from this subscription.
+6. Use Least Ping / leastPing when available.
+7. Enable Test outbounds.
+8. Configure Fallback outbound when the installed v2rayNG version exposes it.
+
+The subscription cannot encode a client-local Policy group. Local testing remains the authoritative selection layer for the phone's current network.

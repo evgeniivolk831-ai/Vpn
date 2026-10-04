@@ -9,7 +9,7 @@
     },
     "0xRadikal-verified": {
       "ok": true,
-      "nodes": 1496,
+      "nodes": 1489,
       "url": "https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/verified/configs_base64.txt"
     },
     "morpheus-best": {
@@ -23,21 +23,25 @@
       "url": "https://dfantomasd.github.io/MyVPN-subscription/public/karing.txt"
     }
   },
-  "unique_nodes": 4862,
-  "vless_nodes": 78,
+  "unique_nodes": 4857,
+  "vless_nodes": 72,
   "candidate_vless": 300,
   "tcp_checked_vless": 300,
   "tcp_reachable_vless": 296,
-  "e2e_tested_vless": 120,
-  "e2e_verified_vless": 78,
+  "e2e_tested_vless": 73,
+  "e2e_verified_vless": 73,
   "published_keys_target": 120,
+  "v2rayng_published_keys_target": 50,
   "subscription": "output/GlobalPulse-Subscription.txt",
+  "v2rayng_subscription": "output/GlobalPulse-v2rayNG.txt",
+  "v2rayng_setup": "output/GlobalPulse-v2rayNG-SETUP.txt",
   "mihomo_subscription": "output/GlobalPulse-Subscription.yaml",
-  "clash_convertible_vless": 78,
+  "clash_convertible_vless": 72,
   "published_all": 200,
-  "published_vless": 78,
+  "published_vless": 72,
+  "published_v2rayng": 50,
   "local_auto_selection": true,
   "local_healthcheck_interval_seconds": 180,
   "failover_interval_seconds": 120,
-  "note": "TCP reachability is a preliminary gate. Main subscription contains only E2E-verified VLESS/Reality/TCP nodes when E2E results are present. from every ISP. Mihomo performs local HTTP health checks and automatic failover from the user's network."
+  "note": "TCP reachability is a preliminary gate. Main subscription contains only E2E-verified VLESS/Reality/TCP nodes when E2E results are present. Mihomo performs local HTTP health checks and automatic failover from the user's network. v2rayNG feed is a smaller latency-ranked subset; v2rayNG local testing remains the final client-side selection layer."
 }
