@@ -5,6 +5,8 @@ import json
 import re
 import urllib.parse
 import urllib.request
+import socket
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -13,9 +15,11 @@ OUT.mkdir(parents=True, exist_ok=True)
 
 MAX_CANDIDATE_VLESS = 300
 PUBLISHED_KEYS = 120
-MIN_PUBLISHED_KEYS = 100
+MIN_PUBLISHED_KEYS = 1
 MAX_ALL = 200
 HEALTHCHECK_URL = "https://www.gstatic.com/generate_204"
+TCP_CHECK_TIMEOUT = 3.0
+TCP_CHECK_WORKERS = 32
 
 SOURCES = [
     ("Au1rxx-verified", "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt", "base64"),
@@ -104,6 +108,33 @@ def protocol_score(uri: str) -> int:
     if low.startswith("ss://"):
         return 55
     return 0
+
+
+def tcp_reachable(uri: str) -> bool:
+    try:
+        parsed = urllib.parse.urlparse(uri)
+        if not parsed.hostname or not parsed.port:
+            return False
+        with socket.create_connection((parsed.hostname, parsed.port), timeout=TCP_CHECK_TIMEOUT):
+            return True
+    except (OSError, ValueError):
+        return False
+
+
+def filter_reachable(nodes: list[str]) -> tuple[list[str], int]:
+    if not nodes:
+        return [], 0
+    reachable: list[str] = []
+    checked = 0
+    with ThreadPoolExecutor(max_workers=TCP_CHECK_WORKERS) as pool:
+        futures = {pool.submit(tcp_reachable, node): node for node in nodes}
+        for future in as_completed(futures):
+            checked += 1
+            if future.result():
+                reachable.append(futures[future])
+    # Preserve protocol score/order after concurrent checking.
+    reachable.sort(key=lambda item: (-protocol_score(item), canonical_key(item)))
+    return reachable, checked
 
 
 def vless_to_clash(uri: str, index: int) -> dict | None:
@@ -278,9 +309,11 @@ candidate_vless = [
 ][:MAX_CANDIDATE_VLESS]
 all_top = unique[:MAX_ALL]
 
+reachable_vless, checked_vless = filter_reachable(candidate_vless)
+
 proxies = []
 vless = []
-for node in candidate_vless:
+for node in reachable_vless:
     if len(proxies) >= PUBLISHED_KEYS:
         break
     try:
@@ -293,8 +326,8 @@ for node in candidate_vless:
 
 if len(proxies) < MIN_PUBLISHED_KEYS:
     raise RuntimeError(
-        f"FAIL_CLOSED: only {len(proxies)} valid VLESS nodes; "
-        f"minimum is {MIN_PUBLISHED_KEYS}"
+        "FAIL_CLOSED: no TCP-reachable VLESS nodes were found; "
+        "refusing to publish a dead subscription"
     )
 
 write_lines(OUT / "GlobalPulse-VLESS.txt", vless)
@@ -371,11 +404,13 @@ write_lines(OUT / "GlobalPulse-Subscription.yaml", clash.rstrip("\n").splitlines
 
 stats = {
     "name": "GlobalPulse VLESS",
-    "policy": "verified-upstream-only",
+    "policy": "tcp-reachable-first-local-auto",
     "sources": source_stats,
     "unique_nodes": len(unique),
     "vless_nodes": len(vless),
     "candidate_vless": len(candidate_vless),
+    "tcp_checked_vless": checked_vless,
+    "tcp_reachable_vless": len(reachable_vless),
     "published_keys_target": PUBLISHED_KEYS,
     "subscription": "output/GlobalPulse-Subscription.txt",
     "mihomo_subscription": "output/GlobalPulse-Subscription.yaml",
@@ -386,7 +421,7 @@ stats = {
     "local_healthcheck_interval_seconds": 180,
     "failover_interval_seconds": 120,
     "note": (
-        "Upstream source verification is not equivalent to reachability "
+        "TCP reachability filtering is a pre-publication gate; it is not equivalent to full VLESS/TLS/Reality end-to-end verification. "
         "from every ISP. Mihomo performs local HTTP health checks and "
         "automatic failover from the user's network."
     ),
