@@ -11,7 +11,12 @@ import urllib.parse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
-TEST_URL = "https://www.gstatic.com/generate_204"
+TEST_URLS = (
+    "https://www.gstatic.com/generate_204",
+    "https://www.google.com/generate_204",
+    "https://cp.cloudflare.com/generate_204",
+)
+ATTEMPTS = 3
 TIMEOUT_SECONDS = 8
 WORKERS = 8
 BASE_PORT = 21000
@@ -49,6 +54,11 @@ def check_one(xray: str, uri: str, port: int) -> dict:
         "uri": uri,
         "status": "UNSUPPORTED",
         "latency_ms": None,
+        "median_latency_ms": None,
+        "p95_latency_ms": None,
+        "success_rate": 0.0,
+        "attempts": 0,
+        "passed_attempts": 0,
         "error": None,
     }
     if not parsed:
@@ -115,23 +125,50 @@ def check_one(xray: str, uri: str, port: int) -> dict:
                 result["status"] = "SOCKS_LISTENER_FAILED"
                 return result
 
-            curl = subprocess.run(
-                [
-                    "curl", "-fsS", "--max-time", str(TIMEOUT_SECONDS),
-                    "--socks5-hostname", f"127.0.0.1:{port}",
-                    "-o", "/dev/null", "-w", "%{http_code}", TEST_URL,
-                ],
-                capture_output=True,
-                text=True,
-                timeout=TIMEOUT_SECONDS + 2,
-            )
-            elapsed = round((time.monotonic() - started) * 1000, 1)
-            result["latency_ms"] = elapsed
-            if curl.returncode == 0 and curl.stdout.strip() in {"204", "200"}:
+            samples = []
+            errors = []
+            passed = 0
+            total = 0
+            for target in TEST_URLS:
+                for _ in range(ATTEMPTS):
+                    total += 1
+                    try:
+                        started_probe = time.monotonic()
+                        curl = subprocess.run(
+                            [
+                                "curl", "-fsS", "--max-time", str(TIMEOUT_SECONDS),
+                                "--socks5-hostname", f"127.0.0.1:{port}",
+                                "-o", "/dev/null", "-w", "%{http_code}", target,
+                            ],
+                            capture_output=True,
+                            text=True,
+                            timeout=TIMEOUT_SECONDS + 2,
+                        )
+                        elapsed = round((time.monotonic() - started_probe) * 1000, 1)
+                        if curl.returncode == 0 and curl.stdout.strip() in {"204", "200"}:
+                            passed += 1
+                            samples.append(elapsed)
+                        else:
+                            errors.append((curl.stderr or curl.stdout)[-240:].strip())
+                    except subprocess.TimeoutExpired as exc:
+                        errors.append(str(exc))
+            result["attempts"] = total
+            result["passed_attempts"] = passed
+            result["success_rate"] = round(passed / total, 3) if total else 0.0
+            if samples:
+                ordered = sorted(samples)
+                result["latency_ms"] = round(sum(samples) / len(samples), 1)
+                mid = len(ordered) // 2
+                result["median_latency_ms"] = round(
+                    ordered[mid] if len(ordered) % 2 else (ordered[mid - 1] + ordered[mid]) / 2, 1
+                )
+                p95_index = min(len(ordered) - 1, max(0, int(len(ordered) * 0.95) - 1))
+                result["p95_latency_ms"] = round(ordered[p95_index], 1)
+            if passed == total and total > 0:
                 result["status"] = "E2E_PASS"
             else:
                 result["status"] = "E2E_FAIL"
-                result["error"] = (curl.stderr or curl.stdout)[-500:].strip()
+                result["error"] = "; ".join(x for x in errors if x)[:500]
             return result
         except (OSError, subprocess.TimeoutExpired) as exc:
             result["status"] = "E2E_FAIL"
@@ -163,10 +200,18 @@ def main() -> int:
         for future in as_completed(futures):
             results.append(future.result())
 
-    results.sort(key=lambda x: (x["status"] != "E2E_PASS", x["latency_ms"] or 10**9, x["uri"]))
+    results.sort(
+        key=lambda x: (
+            x["status"] != "E2E_PASS",
+            -(x.get("success_rate") or 0.0),
+            x.get("median_latency_ms") or 10**9,
+            x["uri"],
+        )
+    )
     summary = {
         "engine": "xray-core",
-        "test_url": TEST_URL,
+        "test_urls": list(TEST_URLS),
+        "attempts_per_target": ATTEMPTS,
         "tested": len(results),
         "e2e_pass": sum(r["status"] == "E2E_PASS" for r in results),
         "e2e_fail": sum(r["status"] == "E2E_FAIL" for r in results),
