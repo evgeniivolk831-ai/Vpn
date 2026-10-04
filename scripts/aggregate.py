@@ -6,6 +6,7 @@ import re
 import urllib.parse
 import urllib.request
 import socket
+import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
@@ -311,9 +312,34 @@ all_top = unique[:MAX_ALL]
 
 reachable_vless, checked_vless = filter_reachable(candidate_vless)
 
+e2e_file = Path(os.environ.get("E2E_RESULTS_FILE", OUT / "e2e-vless.json"))
+e2e_verified: list[str] = []
+e2e_tested = 0
+e2e_passed = 0
+if e2e_file.exists():
+    try:
+        e2e_data = json.loads(e2e_file.read_text(encoding="utf-8"))
+        e2e_tested = int(e2e_data.get("tested", 0))
+        e2e_passed = int(e2e_data.get("e2e_pass", 0))
+        passed_keys = {
+            canonical_key(item["uri"])
+            for item in e2e_data.get("results", [])
+            if item.get("status") == "E2E_PASS" and item.get("uri")
+        }
+        e2e_verified = [
+            node for node in reachable_vless
+            if canonical_key(node) in passed_keys
+        ]
+    except (OSError, ValueError, TypeError, json.JSONDecodeError) as exc:
+        raise RuntimeError(f"FAIL_CLOSED: invalid E2E results: {exc}") from exc
+
+publish_pool = e2e_verified if e2e_file.exists() else reachable_vless
+if e2e_file.exists() and not e2e_verified:
+    raise RuntimeError("FAIL_CLOSED: E2E check produced zero verified VLESS nodes")
+
 proxies = []
 vless = []
-for node in reachable_vless:
+for node in publish_pool:
     if len(proxies) >= PUBLISHED_KEYS:
         break
     try:
@@ -331,6 +357,7 @@ if len(proxies) < MIN_PUBLISHED_KEYS:
     )
 
 write_lines(OUT / "GlobalPulse-VLESS.txt", vless)
+write_lines(OUT / "GlobalPulse-TCP-Reachable-VLESS.txt", reachable_vless)
 write_lines(OUT / "GlobalPulse-All.txt", all_top)
 
 encoded = base64.b64encode(
@@ -404,13 +431,15 @@ write_lines(OUT / "GlobalPulse-Subscription.yaml", clash.rstrip("\n").splitlines
 
 stats = {
     "name": "GlobalPulse VLESS",
-    "policy": "tcp-reachable-first-local-auto",
+    "policy": "e2e-verified-first-local-auto",
     "sources": source_stats,
     "unique_nodes": len(unique),
     "vless_nodes": len(vless),
     "candidate_vless": len(candidate_vless),
     "tcp_checked_vless": checked_vless,
     "tcp_reachable_vless": len(reachable_vless),
+    "e2e_tested_vless": e2e_tested,
+    "e2e_verified_vless": e2e_passed,
     "published_keys_target": PUBLISHED_KEYS,
     "subscription": "output/GlobalPulse-Subscription.txt",
     "mihomo_subscription": "output/GlobalPulse-Subscription.yaml",
@@ -421,7 +450,7 @@ stats = {
     "local_healthcheck_interval_seconds": 180,
     "failover_interval_seconds": 120,
     "note": (
-        "TCP reachability filtering is a pre-publication gate; it is not equivalent to full VLESS/TLS/Reality end-to-end verification. "
+        "TCP reachability is a preliminary gate. Main subscription contains only E2E-verified VLESS/Reality/TCP nodes when E2E results are present. "
         "from every ISP. Mihomo performs local HTTP health checks and "
         "automatic failover from the user's network."
     ),
