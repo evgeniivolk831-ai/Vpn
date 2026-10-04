@@ -1,6 +1,6 @@
 {
   "name": "GlobalPulse VLESS",
-  "policy": "tcp-reachable-first-local-auto",
+  "policy": "e2e-verified-first-local-auto",
   "sources": {
     "Au1rxx-verified": {
       "ok": true,
@@ -24,18 +24,20 @@
     }
   },
   "unique_nodes": 4862,
-  "vless_nodes": 120,
+  "vless_nodes": 78,
   "candidate_vless": 300,
   "tcp_checked_vless": 300,
-  "tcp_reachable_vless": 294,
+  "tcp_reachable_vless": 296,
+  "e2e_tested_vless": 120,
+  "e2e_verified_vless": 78,
   "published_keys_target": 120,
   "subscription": "output/GlobalPulse-Subscription.txt",
   "mihomo_subscription": "output/GlobalPulse-Subscription.yaml",
-  "clash_convertible_vless": 120,
+  "clash_convertible_vless": 78,
   "published_all": 200,
-  "published_vless": 120,
+  "published_vless": 78,
   "local_auto_selection": true,
   "local_healthcheck_interval_seconds": 180,
   "failover_interval_seconds": 120,
-  "note": "TCP reachability filtering is a pre-publication gate; it is not equivalent to full VLESS/TLS/Reality end-to-end verification. from every ISP. Mihomo performs local HTTP health checks and automatic failover from the user's network."
+  "note": "TCP reachability is a preliminary gate. Main subscription contains only E2E-verified VLESS/Reality/TCP nodes when E2E results are present. from every ISP. Mihomo performs local HTTP health checks and automatic failover from the user's network."
 }
