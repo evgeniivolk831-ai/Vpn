@@ -4,12 +4,12 @@
   "sources": {
     "Au1rxx-verified": {
       "ok": true,
-      "nodes": 1548,
+      "nodes": 1525,
       "url": "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt"
     },
     "0xRadikal-verified": {
       "ok": true,
-      "nodes": 1289,
+      "nodes": 1425,
       "url": "https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/verified/configs_base64.txt"
     },
     "morpheus-best": {
@@ -23,9 +23,12 @@
       "url": "https://dfantomasd.github.io/MyVPN-subscription/public/karing.txt"
     }
   },
-  "unique_nodes": 4690,
+  "unique_nodes": 4789,
   "vless_nodes": 120,
-  "clash_convertible_vless": 95,
+  "candidate_vless": 300,
+  "published_keys_target": 120,
+  "subscription": "output/GlobalPulse-Subscription.yaml",
+  "clash_convertible_vless": 120,
   "published_all": 200,
   "published_vless": 120,
   "local_auto_selection": true,
