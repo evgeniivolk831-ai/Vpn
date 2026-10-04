@@ -363,7 +363,22 @@ if len(proxies) < MIN_PUBLISHED_KEYS:
         "refusing to publish a dead subscription"
     )
 
-v2rayng_vless = vless[:V2RAYNG_PUBLISHED_KEYS]
+# Build a genuinely diverse top-50 pool: do not spend the whole pool on
+# multiple configs pointing at the same server:port endpoint.
+v2rayng_vless = []
+seen_endpoints: set[str] = set()
+for node in vless:
+    try:
+        parsed = urllib.parse.urlparse(node)
+        endpoint = f"{parsed.hostname}:{parsed.port}"
+    except (ValueError, TypeError):
+        continue
+    if not parsed.hostname or not parsed.port or endpoint in seen_endpoints:
+        continue
+    seen_endpoints.add(endpoint)
+    v2rayng_vless.append(node)
+    if len(v2rayng_vless) >= V2RAYNG_PUBLISHED_KEYS:
+        break
 
 write_lines(OUT / "GlobalPulse-VLESS.txt", vless)
 write_lines(OUT / "GlobalPulse-TCP-Reachable-VLESS.txt", reachable_vless)
