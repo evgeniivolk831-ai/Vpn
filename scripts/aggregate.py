@@ -130,7 +130,13 @@ def vless_to_clash(uri: str, index: int) -> dict | None:
     }
 
     security = (one("security") or "").lower()
-    network = (one("type") or "tcp").lower()
+    network = (one("type") or "tcp").lower().split("?", 1)[0]
+    supported_networks = {"tcp", "ws", "grpc", "h2", "http"}
+    if network not in supported_networks:
+        return None
+
+    if security == "reality" and not one("pbk"):
+        return None
 
     if security != "none":
         proxy["tls"] = True
