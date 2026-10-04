@@ -321,15 +321,16 @@ if e2e_file.exists():
         e2e_data = json.loads(e2e_file.read_text(encoding="utf-8"))
         e2e_tested = int(e2e_data.get("tested", 0))
         e2e_passed = int(e2e_data.get("e2e_pass", 0))
-        passed_keys = {
-            canonical_key(item["uri"])
+        passed_latency = {
+            canonical_key(item["uri"]): float(item.get("latency_ms") or 10**9)
             for item in e2e_data.get("results", [])
             if item.get("status") == "E2E_PASS" and item.get("uri")
         }
         e2e_verified = [
             node for node in reachable_vless
-            if canonical_key(node) in passed_keys
+            if canonical_key(node) in passed_latency
         ]
+        e2e_verified.sort(key=lambda node: (passed_latency[canonical_key(node)], -protocol_score(node), canonical_key(node)))
     except (OSError, ValueError, TypeError, json.JSONDecodeError) as exc:
         raise RuntimeError(f"FAIL_CLOSED: invalid E2E results: {exc}") from exc
 
