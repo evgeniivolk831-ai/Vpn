@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output"
 OUT.mkdir(parents=True, exist_ok=True)
 
-MAX_CANDIDATE_VLESS = 600
+MAX_CANDIDATE_VLESS = 1200
 PUBLISHED_KEYS = 120
 V2RAYNG_PUBLISHED_KEYS = 50
 MIN_PUBLISHED_KEYS = 1
@@ -305,10 +305,36 @@ for node in all_nodes:
 
 unique.sort(key=lambda item: (-protocol_score(item), canonical_key(item)))
 
-candidate_vless = [
+vless_unique = [
     node for node in unique
     if node.lower().startswith("vless://")
-][:MAX_CANDIDATE_VLESS]
+]
+
+
+def endpoint_key(uri: str) -> str | None:
+    """Return a stable server:port identity for diversity-aware selection."""
+    try:
+        parsed = urllib.parse.urlparse(uri)
+        if not parsed.hostname or not parsed.port:
+            return None
+        return f"{parsed.hostname.lower()}:{parsed.port}"
+    except (ValueError, TypeError):
+        return None
+
+
+# E2E budget is spent on distinct endpoints first. This prevents multiple
+# URI variants of one server:port from consuming the health-check budget.
+candidate_vless: list[str] = []
+candidate_endpoints: set[str] = set()
+for node in vless_unique:
+    endpoint = endpoint_key(node)
+    if endpoint is None or endpoint in candidate_endpoints:
+        continue
+    candidate_endpoints.add(endpoint)
+    candidate_vless.append(node)
+    if len(candidate_vless) >= MAX_CANDIDATE_VLESS:
+        break
+
 all_top = unique[:MAX_ALL]
 
 reachable_vless, checked_vless = filter_reachable(candidate_vless)
@@ -499,8 +525,12 @@ stats = {
     "unique_nodes": len(unique),
     "vless_nodes": len(vless),
     "candidate_vless": len(candidate_vless),
+    "candidate_unique_endpoints": len({endpoint_key(node) for node in candidate_vless if endpoint_key(node)}),
     "tcp_checked_vless": checked_vless,
     "tcp_reachable_vless": len(reachable_vless),
+    "tcp_reachable_unique_endpoints": len({
+        endpoint_key(node) for node in reachable_vless if endpoint_key(node)
+    }),
     "e2e_tested_vless": e2e_tested,
     "e2e_verified_vless": len(e2e_verified),
     "published_keys_target": PUBLISHED_KEYS,
