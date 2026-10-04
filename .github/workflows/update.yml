@@ -101,4 +101,5 @@ jobs:
             exit 0
           fi
           git commit -m "chore: hourly GlobalPulse update"
+          git pull --rebase origin main
           git push
