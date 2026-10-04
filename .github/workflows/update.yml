@@ -32,6 +32,27 @@ jobs:
       - name: Build feeds
         run: python3 scripts/aggregate.py
 
+      - name: Install Xray-core
+        run: |
+          curl -fsSL --retry 3 --connect-timeout 10 --max-time 120 \
+            -o /tmp/xray.zip \
+            https://github.com/XTLS/Xray-core/releases/download/v26.7.28/Xray-linux-64.zip
+          unzip -q /tmp/xray.zip -d /tmp/xray
+          chmod +x /tmp/xray/xray
+          /tmp/xray/xray version
+
+      - name: End-to-end VLESS Reality health check
+        run: |
+          python3 scripts/e2e_vless_check.py \
+            --xray /tmp/xray/xray \
+            --input output/GlobalPulse-VLESS.txt \
+            --output output/e2e-vless.json
+
+      - name: Rebuild feeds from E2E-verified nodes
+        env:
+          E2E_RESULTS_FILE: output/e2e-vless.json
+        run: python3 scripts/aggregate.py
+
       - name: Validate generated YAML
         run: |
           python3 -m pip install --disable-pip-version-check --quiet pyyaml
@@ -63,7 +84,11 @@ jobs:
               raise SystemExit(f"FAIL_CLOSED: Base64 subscription has {len(lines)} nodes")
           if not all(line.lower().startswith("vless://") for line in lines):
               raise SystemExit("FAIL_CLOSED: Base64 subscription contains non-VLESS entries")
-          print(f"Generated YAML is valid; TCP-reachable proxies: {len(proxies)}; Base64 VLESS subscription: {len(lines)}")
+          stats = __import__("json").loads(Path("output/stats.json").read_text(encoding="utf-8"))
+          e2e = stats.get("e2e_verified_vless", 0)
+          if e2e < 1:
+              raise SystemExit("FAIL_CLOSED: no end-to-end verified VLESS nodes")
+          print(f"Generated YAML is valid; E2E-verified proxies: {len(proxies)}; Base64 VLESS subscription: {len(lines)}")
           PY
 
       - name: Commit changed feeds
