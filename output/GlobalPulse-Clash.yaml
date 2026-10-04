@@ -1,0 +1,1619 @@
+proxies:
+  - name: "GP-001"
+    type: "vless"
+    server: "ru19.aimodelhub.top"
+    port: 443
+    uuid: "13ef8e97-815a-000b-8688-0154d85d26bf"
+    udp: true
+    tls: true
+    servername: "ru19.aimodelhub.top"
+    client-fingerprint: "random"
+    reality-opts:
+      public-key: "Fe5PnOaERhhHbBXhGBEsQaRUBpSM8hCc03zOEpHz218"
+      short-id: "51b784e13468"
+    network: "xhttp"
+  - name: "GP-002"
+    type: "vless"
+    server: "13.143.185.29"
+    port: 8448
+    uuid: "2897717e-55b6-4d3d-8752-72c5fd4614ae"
+    udp: true
+    tls: true
+    servername: "api-maps.yandex.ru"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "SEFnqOIUiHZpOgtXZ3FFFhVTALc1ReEVt78femI770U"
+      short-id: "c90743ca346c8da7"
+    network: "xhttp"
+  - name: "GP-003"
+    type: "vless"
+    server: "s958.wagahaha.xyz"
+    port: 443
+    uuid: "5d02517f-63d5-3e9f-b467-1bcf4d4e25d3"
+    udp: true
+    tls: true
+    servername: "a29466d1s98.gogocs.xyz"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "onZAYhiTdAstxmlCt89CCYsuwIJg0HtI83FVyAMf0WY"
+      short-id: "f60bc53a"
+    network: "xhttp"
+  - name: "GP-004"
+    type: "vless"
+    server: "95.85.252.205"
+    port: 8443
+    uuid: "5ff52caa-c674-4eac-a8d2-7c846576b005"
+    udp: true
+    tls: true
+    servername: "www.samsung.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "S09Ije3DJnv5FxUEn8nr3sURQFlG3EWhmIODR1ZYmGc"
+      short-id: "975dd788251264ef"
+    network: "xhttp"
+  - name: "GP-005"
+    type: "vless"
+    server: "ro-xh02.tcp-reset-club.net"
+    port: 8443
+    uuid: "721bacfe-ff09-4e63-a735-686015bc1351"
+    udp: true
+    tls: true
+    servername: "s3.netavex.com"
+    reality-opts:
+      public-key: "Gu_QdtOX6E8pZcYvDWgHKA5dxcit7hrpU27sizCEWXg"
+      short-id: "e0"
+    network: "xhttp"
+  - name: "GP-006"
+    type: "vless"
+    server: "185.90.61.12"
+    port: 443
+    uuid: "8ee2927b-1be9-404d-9b96-61dcc51bbd37"
+    udp: true
+    tls: true
+    servername: "sberbank.ru"
+    client-fingerprint: "safari"
+    reality-opts:
+      public-key: "PlP5L4lWEh_9h53_U-5kqwzl4C-eCrJoA6BF74cdfk8"
+      short-id: "4164bb3d830b817f"
+    network: "xhttp"
+  - name: "GP-007"
+    type: "vless"
+    server: "37.18.14.168"
+    port: 10654
+    uuid: "953358cb-82ba-4296-960d-6d2ec3468f4c"
+    udp: true
+    tls: true
+    servername: "bl3fk52.sysopnova.art"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "ds10ztOlMn8xfeIKEQ1m3I-tdem-abZbHKtJCU13CQM"
+      short-id: "5c3fb122"
+    network: "xhttp"
+  - name: "GP-008"
+    type: "vless"
+    server: "itga8.guardora.pro"
+    port: 10654
+    uuid: "953358cb-82ba-4296-960d-6d2ec3468f4c"
+    udp: true
+    tls: true
+    servername: "bl3fk52.sysopnova.art"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "ds10ztOlMn8xfeIKEQ1m3I-tdem-abZbHKtJCU13CQM"
+      short-id: "5c3fb122"
+    network: "xhttp"
+  - name: "GP-009"
+    type: "vless"
+    server: "itga8.guardora.pro"
+    port: 10654
+    uuid: "953358cb-82ba-4296-960d-6d2ec3468f4c"
+    udp: true
+    tls: true
+    servername: "dailycanvas.sysopnova.art"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "lGKKIZsN9yBMxzZm8yl7nzNwJII18c_wLd_AbzzvRD8"
+      short-id: "53361376"
+    network: "xhttp"
+  - name: "GP-010"
+    type: "vless"
+    server: "yamabiko.proxy.rlwy.net"
+    port: 47925
+    uuid: "Telegramjoin"
+    udp: true
+    tls: true
+    servername: "is1-ssl.mzstatic.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "xgTTIieq7ylLXTDNgyYnAshRAPXRw1O9iqC-E7Ad2Uc"
+      short-id: "3f"
+    network: "xhttp"
+  - name: "GP-011"
+    type: "vless"
+    server: "94.156.122.251"
+    port: 443
+    uuid: "ca428a2e-7f82-4030-851b-cab731a5645a"
+    udp: true
+    tls: true
+    servername: "yandex.by"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "F2MKDw5CCtP1oXIej2EgNxB01k3eyNu7tKCFfucgnRA"
+    network: "xhttp"
+  - name: "GP-012"
+    type: "vless"
+    server: "l10.l-itx.info"
+    port: 443
+    uuid: "ca428a2e-7f82-4030-851b-cab731a5645a"
+    udp: true
+    tls: true
+    servername: "yandex.by"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "F2MKDw5CCtP1oXIej2EgNxB01k3eyNu7tKCFfucgnRA"
+    network: "xhttp"
+  - name: "GP-013"
+    type: "vless"
+    server: "31.172.79.217"
+    port: 4443
+    uuid: "e0bd9dfa-0cf9-47c0-92ac-7dba08ebcff8"
+    udp: true
+    tls: true
+    servername: "www.cloudflare.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "8cr592XHsE4oen8nFqeFqL00vUDA8eUI17RTUNyizDw"
+      short-id: "542c92a0a53608f2"
+    network: "xhttp"
+  - name: "GP-014"
+    type: "vless"
+    server: "2.28.142.170"
+    port: 443
+    uuid: "f774f037-6320-42e3-a97b-6d4a1f018dd5"
+    udp: true
+    tls: true
+    servername: "germanytest.tulnaro.ir"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "IqFTx4k5VQydmffvavaOHDXBtdgDxX26A6NtsVvDfhw"
+      short-id: "d485c3d5248d6b51"
+    network: "xhttp"
+  - name: "GP-015"
+    type: "vless"
+    server: "167.17.69.171"
+    port: 443
+    uuid: "00144519-7e0d-476b-8d28-435576af9262"
+    udp: true
+    tls: true
+    servername: "www.cloudflare.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "ALT8hIGeZEhi0sQFbXP_ntBg8Xo-v7i0YCLrqTnBxRk"
+      short-id: "0990d22f"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-016"
+    type: "vless"
+    server: "167.17.69.171"
+    port: 443
+    uuid: "00144519-7e0d-476b-8d28-435576af9262"
+    udp: true
+    tls: true
+    servername: "www.cloudflare.com"
+    client-fingerprint: "edge"
+    reality-opts:
+      public-key: "ALT8hIGeZEhi0sQFbXP_ntBg8Xo-v7i0YCLrqTnBxRk"
+      short-id: "0990d22f"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-017"
+    type: "vless"
+    server: "167.17.69.171"
+    port: 443
+    uuid: "00144519-7e0d-476b-8d28-435576af9262"
+    udp: true
+    tls: true
+    servername: "www.cloudflare.com"
+    reality-opts:
+      public-key: "ALT8hIGeZEhi0sQFbXP_ntBg8Xo-v7i0YCLrqTnBxRk"
+      short-id: "0990d22f"
+    flow: "xtls-rprx-vision"
+    network: "tcp?type=tcp"
+  - name: "GP-018"
+    type: "vless"
+    server: "34.29.203.135"
+    port: 443
+    uuid: "0106efd7-39bf-449d-b734-a4aa758d6480"
+    udp: true
+    tls: true
+    servername: "www.cloudflare.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "VL1ZiaWxae8teZWJeBAIHadbo7z1Ezu1KA2kIA1TDmk"
+      short-id: "7dfdbf323c4ef0a8"
+    network: "tcp"
+  - name: "GP-019"
+    type: "vless"
+    server: "34.29.203.135"
+    port: 443
+    uuid: "0106efd7-39bf-449d-b734-a4aa758d6480"
+    udp: true
+    tls: true
+    servername: "www.cloudflare.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "VL1ZiaWxae8teZWJeBAIHadbo7z1Ezu1KA2kIA1TDmk"
+      short-id: "7dfdbf323c4ef0a8"
+    network: "tcp"
+  - name: "GP-020"
+    type: "vless"
+    server: "xyz.cdkshop.ir"
+    port: 8443
+    uuid: "01271baa-c5e3-4e2d-b43e-2c963c5bc21f"
+    udp: true
+    tls: true
+    servername: "www.github.com"
+    client-fingerprint: "random"
+    reality-opts:
+      public-key: "9LyZjKAQkh2_FwDS21QVW05gfBRR77KjatFS8EtRyU4"
+      short-id: "3bfaadd82d8e"
+    network: "tcp"
+  - name: "GP-021"
+    type: "vless"
+    server: "103.27.157.120"
+    port: 443
+    uuid: "025a80fb-233b-4714-b02d-f4384c653d58"
+    udp: true
+    tls: true
+    servername: "download.amd.com"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "k0883nIGfstbzb8hES-dQ1yPcBwbUbnsyg4w-UA5gkA"
+      short-id: "68aaa5222092bbea"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-022"
+    type: "vless"
+    server: "78.111.89.171"
+    port: 443
+    uuid: "0370b162-baff-4757-86cc-cce4bf07f6f1"
+    udp: true
+    tls: true
+    servername: "www.cloudflare.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "lYcMPEgf6ePmF_d8RXR5fsVorycW37v_ECl-fz_H6w4"
+      short-id: "cfe08c23a85f24"
+    network: "tcp"
+  - name: "GP-023"
+    type: "vless"
+    server: "jpga01.jumpernode.site"
+    port: 443
+    uuid: "05453546-201f-4e8d-97ae-fd70da0e951f"
+    udp: true
+    tls: true
+    servername: "amzn.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "AgTktefiMM58y7f-KFgEtmVti_YJbd0GPSkxNeJ0RH4"
+      short-id: "c8e49965"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-024"
+    type: "vless"
+    server: "82.118.22.161"
+    port: 443
+    uuid: "05488656-d4bf-4634-8b2e-e4ff5a56c7e2"
+    udp: true
+    tls: true
+    servername: "www.cloudflare.com"
+    client-fingerprint: "safari"
+    reality-opts:
+      public-key: "xY1KpNxaIGmi6jfeudYQ_aaLGQqWK_uHStnwUFd2_2E"
+      short-id: "fa3ea655619a3e78"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-025"
+    type: "vless"
+    server: "47.253.226.114"
+    port: 443
+    uuid: "055a1ce8-2a16-4a0d-a2c2-22826c9b2413"
+    udp: true
+    tls: true
+    servername: "www.cloudflare.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "Svl81isn16RPAFnjtmYw7A6TPnsEPLHuYYaJht65Rzc"
+    flow: "xtls-rprx-vision"
+    network: "raw"
+  - name: "GP-026"
+    type: "vless"
+    server: "178.105.168.171"
+    port: 1816
+    uuid: "06d4d001-4168-4876-9416-7caecf578f40"
+    udp: true
+    tls: true
+    servername: "ekranmardomi.ir"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "E-qYzfigUKGAQQeNwMr8lrG11baLfNMZjSYaqTt-yz8"
+      short-id: "d864e5f6a6b1f347"
+    network: "tcp"
+  - name: "GP-027"
+    type: "vless"
+    server: "178.105.168.171"
+    port: 1817
+    uuid: "06d4d001-4168-4876-9416-7caecf578f40"
+    udp: true
+    tls: true
+    servername: "qodsna.ir"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "0y65_371gTbns64BuUH59N9RoNAE3A9u7UZ0IuoqtHQ"
+      short-id: "7f3a00717d"
+    network: "tcp"
+  - name: "GP-028"
+    type: "vless"
+    server: "178.105.168.171"
+    port: 1856
+    uuid: "06d4d001-4168-4876-9416-7caecf578f40"
+    udp: true
+    tls: true
+    servername: "divar.ir"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "KfUY0yqC1nxo_ZLiYJUj_KmJo7WZ_gB8swehmsPpBw8"
+      short-id: "346014f2ec"
+    network: "tcp"
+  - name: "GP-029"
+    type: "vless"
+    server: "178.105.168.171"
+    port: 1858
+    uuid: "06d4d001-4168-4876-9416-7caecf578f40"
+    udp: true
+    tls: true
+    servername: "www.digikala.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "Z0uk8sN0nQxZUzQZxRxdvZCQJHY4puffCXnHH5qPsAo"
+      short-id: "3533e6aeb621ec66"
+    network: "tcp"
+  - name: "GP-030"
+    type: "vless"
+    server: "178.105.168.171"
+    port: 1870
+    uuid: "06d4d001-4168-4876-9416-7caecf578f40"
+    udp: true
+    tls: true
+    servername: "bimeh.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "fvs6pc3p8Ub1jfix7hPWPjKIkOrOwCjaZUEJX41Qvz8"
+      short-id: "de3d508c9f31e5"
+    network: "tcp"
+  - name: "GP-031"
+    type: "vless"
+    server: "178.105.168.171"
+    port: 1881
+    uuid: "06d4d001-4168-4876-9416-7caecf578f40"
+    udp: true
+    tls: true
+    servername: "media.jamkaran.ir"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "5-1LVZdPl-Tbr-dF29NBZRv2u33xyuRFCEVehSHo3mU"
+      short-id: "d2620ef8270ece71"
+    network: "tcp"
+  - name: "GP-032"
+    type: "vless"
+    server: "178.105.168.171"
+    port: 1894
+    uuid: "06d4d001-4168-4876-9416-7caecf578f40"
+    udp: true
+    tls: true
+    servername: "salehin.ir"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "j3668j3KcON22GVcooCUbKadsRPu3-b8bpGxBZnkEQs"
+      short-id: "57d37a396b6a5db5"
+    network: "tcp"
+  - name: "GP-033"
+    type: "vless"
+    server: "178.105.168.171"
+    port: 8443
+    uuid: "06d4d001-4168-4876-9416-7caecf578f40"
+    udp: true
+    tls: true
+    servername: "www.intel.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "0ZJB66GqmKKJsqGBP7UYr2BgtJ-rV-U8jf9e-bNCoWs"
+      short-id: "ba80"
+    network: "tcp"
+  - name: "GP-034"
+    type: "vless"
+    server: "178.105.168.171"
+    port: 9443
+    uuid: "06d4d001-4168-4876-9416-7caecf578f40"
+    udp: true
+    tls: true
+    servername: "explore.amd.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "OvEpExEu-A6ZRSO1BddxIrQVCvLNcHCVlVpb8Gxzcxs"
+      short-id: "cacf9459"
+    network: "tcp"
+  - name: "GP-035"
+    type: "vless"
+    server: "23.191.200.207"
+    port: 443
+    uuid: "09a0a4a4-81b8-4261-a23c-424ab42f48f5"
+    udp: true
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "7j3hmlHrEDk3Kjx-dFG3E3jf0c6PZF45trIPFsuKWmI"
+    flow: "xtls-rprx-vision"
+    network: "raw"
+  - name: "GP-036"
+    type: "vless"
+    server: "23.191.200.207"
+    port: 443
+    uuid: "09a0a4a4-81b8-4261-a23c-424ab42f48f5"
+    udp: true
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "7j3hmlHrEDk3Kjx-dFG3E3jf0c6PZF45trIPFsuKWmI"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-037"
+    type: "vless"
+    server: "34.104.237.214"
+    port: 443
+    uuid: "0c4c6ebb-603f-4429-8682-beef6b65b80d"
+    udp: true
+    tls: true
+    servername: "www.cloudflare.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "Ti7zRkfweHdrQ5QHI9o_zEgHn39xRfMG2C2Gfp_AMHE"
+      short-id: "8380ad05cd21a69f"
+    network: "tcp"
+  - name: "GP-038"
+    type: "vless"
+    server: "46.8.209.224"
+    port: 443
+    uuid: "0c572c2d-d251-4e61-846e-d0efe472d7d0"
+    udp: true
+    tls: true
+    servername: "www.vk.com"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "ZlXBEYDy1NPe1mLvq7j8CCB9fBIaIvc8X3UZsbVxNT8"
+      short-id: "ae03e6ef452252e0"
+    flow: "xtls-rprx-vision"
+    network: "raw"
+  - name: "GP-039"
+    type: "vless"
+    server: "23.191.200.206"
+    port: 443
+    uuid: "0deceb8d-9ac0-4be1-b23f-2a650ec94213"
+    udp: true
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "7j3hmlHrEDk3Kjx-dFG3E3jf0c6PZF45trIPFsuKWmI"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-040"
+    type: "vless"
+    server: "23.191.200.206"
+    port: 443
+    uuid: "0deceb8d-9ac0-4be1-b23f-2a650ec94213"
+    udp: true
+    tls: true
+    servername: "dl.google.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "7j3hmlHrEDk3Kjx-dFG3E3jf0c6PZF45trIPFsuKWmI"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-041"
+    type: "vless"
+    server: "jp-nrt-1.blook.network"
+    port: 443
+    uuid: "0e60c050-7bb9-4210-9b5c-5749a53f6d76"
+    udp: true
+    tls: true
+    servername: "jp-nrt-1.blook.network"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "K64BDKK1ZIZis2nnBKhkhT-0Lo7iszkU9An2ydlIXQM"
+      short-id: "4fbe"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-042"
+    type: "vless"
+    server: "151.241.226.201"
+    port: 2053
+    uuid: "0eed6293-8cf1-4e77-ac10-9c3d50d0b2f8"
+    udp: true
+    tls: true
+    servername: "www.apple.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "bYW_MmB_CUHrsyoCAUKviI2LZdHf63yY2yOPXbih104"
+      short-id: "9e419c0759b54d6f"
+    network: "tcp"
+  - name: "GP-043"
+    type: "vless"
+    server: "78.40.193.94"
+    port: 443
+    uuid: "0f771058-7892-4d46-b77e-a69e811b9cbc"
+    udp: true
+    tls: true
+    servername: "hls-svod.itunes.apple.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "Q15z1J7L4r_PNKs9E3n5kAPxGsVlahY4ff3nOM8v3E8"
+      short-id: "f716fd72"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-044"
+    type: "vless"
+    server: "107.181.151.241"
+    port: 443
+    uuid: "106d20f6-d70a-40e2-b69b-8e82baf8d117"
+    udp: true
+    tls: true
+    servername: "www.microsoft.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "FjcEZNQ8t5E4R04_11T6ghsOutdqwKKrelkuadakoQg"
+      short-id: "60500a63ad12"
+    flow: "xtls-rprx-vision"
+    network: "raw"
+  - name: "GP-045"
+    type: "vless"
+    server: "staging.lastilhame.monster"
+    port: 443
+    uuid: "106d20f6-d70a-40e2-b69b-8e82baf8d117"
+    udp: true
+    tls: true
+    servername: "www.microsoft.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "FjcEZNQ8t5E4R04_11T6ghsOutdqwKKrelkuadakoQg"
+      short-id: "60500a63ad12"
+    flow: "xtls-rprx-vision"
+    network: "raw"
+  - name: "GP-046"
+    type: "vless"
+    server: "154.12.38.159"
+    port: 443
+    uuid: "12c465bd-11a3-4fd8-8aa9-19b20a883b9e"
+    udp: true
+    tls: true
+    servername: "itunes.apple.com"
+    reality-opts:
+      public-key: "iv4XmZKQUC4KEuMaWZxDmjJOlGEnS3rRw-Nk8h93zUU"
+      short-id: "f61a3a8f"
+    network: "ws"
+    ws-opts:
+      path: "/ws"
+      headers:
+        Host: "itunes.apple.com"
+  - name: "GP-047"
+    type: "vless"
+    server: "46.28.71.247"
+    port: 443
+    uuid: "12c53e32-e589-47d6-b857-e4132294f767"
+    udp: true
+    tls: true
+    servername: "www.cloudflare.com"
+    reality-opts:
+      public-key: "v4MuZIvFrTPT5GHMSaPryUAbIZlLstmsUTzmC1E-JTE"
+      short-id: "0dfc23fe80778c00"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-048"
+    type: "vless"
+    server: "107.181.151.39"
+    port: 443
+    uuid: "13aef2e0-b3fb-4322-a0e9-c10b908ce6b5"
+    udp: true
+    tls: true
+    servername: "www.techradar.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "J-dv-HrWfQ_IOoyutv0Kg-rO8QwoRwc02dS1dS_tblk"
+      short-id: "87f895f23064"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-049"
+    type: "vless"
+    server: "server.slavkiti.monster"
+    port: 443
+    uuid: "13aef2e0-b3fb-4322-a0e9-c10b908ce6b5"
+    udp: true
+    tls: true
+    servername: "www.techradar.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "J-dv-HrWfQ_IOoyutv0Kg-rO8QwoRwc02dS1dS_tblk"
+      short-id: "87f895f23064"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-050"
+    type: "vless"
+    server: "77.91.84.45"
+    port: 22
+    uuid: "1411946d-5eee-45e6-bbe5-99d0cd198484"
+    udp: true
+    tls: true
+    servername: "speed.cloudflare.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "E901rE6_39UQ4zbbzapweeV1vHC2X2ZjQRvG5_UrEwE"
+      short-id: "456d3503eda9fa6f"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-051"
+    type: "vless"
+    server: "159.89.87.21"
+    port: 28190
+    uuid: "14c80e0e-f7ce-4991-94fc-99a1db4a9b1e"
+    udp: true
+    tls: true
+    servername: "aws.amazon.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "ZJRnFU-1s1JOnO8E9uZ7b00l1fPEh63fGRbdBANFRno"
+    flow: "xtls-rprx-vision"
+    network: "raw"
+  - name: "GP-052"
+    type: "vless"
+    server: "159.89.87.21"
+    port: 28190
+    uuid: "14c80e0e-f7ce-4991-94fc-99a1db4a9b1e"
+    udp: true
+    tls: true
+    servername: "aws.amazon.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "ZJRnFU-1s1JOnO8E9uZ7b00l1fPEh63fGRbdBANFRno"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-053"
+    type: "vless"
+    server: "159.89.87.21"
+    port: 28190
+    uuid: "14c80e0e-f7ce-4991-94fc-99a1db4a9b1e"
+    udp: true
+    tls: true
+    servername: "aws.amazon.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "ZJRnFU-1s1JOnO8E9uZ7b00l1fPEh63fGRbdBANFRno"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-054"
+    type: "vless"
+    server: "159.89.87.21"
+    port: 28190
+    uuid: "14c80e0e-f7ce-4991-94fc-99a1db4a9b1e"
+    udp: true
+    tls: true
+    servername: "aws.amazon.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "ZJRnFU-1s1JOnO8E9uZ7b00l1fPEh63fGRbdBANFRno"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-055"
+    type: "vless"
+    server: "159.89.87.21"
+    port: 28190
+    uuid: "14c80e0e-f7ce-4991-94fc-99a1db4a9b1e"
+    udp: true
+    tls: true
+    servername: "aws.amazon.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "ZJRnFU-1s1JOnO8E9uZ7b00l1fPEh63fGRbdBANFRno"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-056"
+    type: "vless"
+    server: "159.89.87.21"
+    port: 28190
+    uuid: "14c80e0e-f7ce-4991-94fc-99a1db4a9b1e"
+    udp: true
+    tls: true
+    servername: "aws.amazon.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "ZJRnFU-1s1JOnO8E9uZ7b00l1fPEh63fGRbdBANFRno"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-057"
+    type: "vless"
+    server: "159.89.87.21"
+    port: 28190
+    uuid: "14c80e0e-f7ce-4991-94fc-99a1db4a9b1e"
+    udp: true
+    tls: true
+    servername: "aws.amazon.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "ZJRnFU-1s1JOnO8E9uZ7b00l1fPEh63fGRbdBANFRno"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-058"
+    type: "vless"
+    server: "159.89.87.21"
+    port: 28190
+    uuid: "14c80e0e-f7ce-4991-94fc-99a1db4a9b1e"
+    udp: true
+    tls: true
+    servername: "aws.amazon.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "ZJRnFU-1s1JOnO8E9uZ7b00l1fPEh63fGRbdBANFRno"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-059"
+    type: "vless"
+    server: "159.89.87.21"
+    port: 28190
+    uuid: "14c80e0e-f7ce-4991-94fc-99a1db4a9b1e"
+    udp: true
+    tls: true
+    servername: "aws.amazon.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "ZJRnFU-1s1JOnO8E9uZ7b00l1fPEh63fGRbdBANFRno"
+    flow: "xtls-rprx-vision"
+    network: "raw"
+  - name: "GP-060"
+    type: "vless"
+    server: "159.89.87.21"
+    port: 28190
+    uuid: "14c80e0e-f7ce-4991-94fc-99a1db4a9b1e"
+    udp: true
+    tls: true
+    servername: "aws.amazon.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "ZJRnFU-1s1JOnO8E9uZ7b00l1fPEh63fGRbdBANFRno"
+    flow: "xtls-rprx-vision"
+    network: "raw"
+  - name: "GP-061"
+    type: "vless"
+    server: "45.32.69.110"
+    port: 443
+    uuid: "1572b9c5-d741-46eb-b4a2-a5d23958dfbe"
+    udp: true
+    tls: true
+    servername: "itunes.apple.com"
+    reality-opts:
+      public-key: "6l-Yq_zkVrnExw8AVv85VwoYnfNc8-dRSpoj_AA-fxY"
+      short-id: "c5cde18f"
+    network: "ws"
+    ws-opts:
+      path: "/ws"
+      headers:
+        Host: "itunes.apple.com"
+  - name: "GP-062"
+    type: "vless"
+    server: "45.32.69.110"
+    port: 443
+    uuid: "1572b9c5-d741-46eb-b4a2-a5d23958dfbe"
+    udp: true
+    tls: true
+    servername: "itunes.apple.com"
+    reality-opts:
+      public-key: "6l-Yq_zkVrnExw8AVv85VwoYnfNc8-dRSpoj_AA-fxY"
+      short-id: "c5cde18f"
+    network: "ws"
+    ws-opts:
+      path: "/ws"
+      headers:
+        Host: "itunes.apple.com"
+  - name: "GP-063"
+    type: "vless"
+    server: "186.246.21.156"
+    port: 40443
+    uuid: "17d29827-7cf1-4115-b40d-548e10ec355d"
+    udp: true
+    tls: true
+    servername: "deepl.com"
+    reality-opts:
+      public-key: "bjOGTQ4xsiFbyCPM_WzoK53L130rW5vZJtuYDJx_pkM"
+      short-id: "aa3c"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-064"
+    type: "vless"
+    server: "billing.netraidly.ru"
+    port: 40443
+    uuid: "17d29827-7cf1-4115-b40d-548e10ec355d"
+    udp: true
+    tls: true
+    servername: "deepl.com"
+    client-fingerprint: "qq"
+    reality-opts:
+      public-key: "bjOGTQ4xsiFbyCPM_WzoK53L130rW5vZJtuYDJx_pkM"
+      short-id: "aa3c"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-065"
+    type: "vless"
+    server: "107.181.151.39"
+    port: 443
+    uuid: "1896c6c9-a941-4688-a865-29027bf7f8e6"
+    udp: true
+    tls: true
+    servername: "www.microsoft.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "J-dv-HrWfQ_IOoyutv0Kg-rO8QwoRwc02dS1dS_tblk"
+      short-id: "6c825bc79850"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-066"
+    type: "vless"
+    server: "server.slavkiti.monster"
+    port: 443
+    uuid: "1896c6c9-a941-4688-a865-29027bf7f8e6"
+    udp: true
+    tls: true
+    servername: "www.microsoft.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "J-dv-HrWfQ_IOoyutv0Kg-rO8QwoRwc02dS1dS_tblk"
+      short-id: "6c825bc79850"
+    flow: "xtls-rprx-vision"
+    network: "raw"
+  - name: "GP-067"
+    type: "vless"
+    server: "45.131.212.231"
+    port: 443
+    uuid: "19513b1b-d29a-4f3e-ba9a-888261e4e048"
+    udp: true
+    tls: true
+    servername: "sellflow.org"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-068"
+    type: "vless"
+    server: "118.167.235.241"
+    port: 24215
+    uuid: "19d5a678-8396-4e3b-93da-ece618d0e83a"
+    udp: true
+    tls: true
+    servername: "addons.mozilla.org"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "mdWKUPMVTtTbDqK10BPb89OcqBC2-Lx-4NOYtqc1GWE"
+    network: "tcp"
+  - name: "GP-069"
+    type: "vless"
+    server: "hinet1.2yly.com"
+    port: 24215
+    uuid: "19d5a678-8396-4e3b-93da-ece618d0e83a"
+    udp: true
+    tls: true
+    servername: "addons.mozilla.org"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "mdWKUPMVTtTbDqK10BPb89OcqBC2-Lx-4NOYtqc1GWE"
+    network: "tcp"
+  - name: "GP-070"
+    type: "vless"
+    server: "94.156.79.93"
+    port: 443
+    uuid: "1a5e7720-abf3-4b9b-bc9b-9a900a04b434"
+    udp: true
+    tls: true
+    servername: "www.microsoft.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "_0fpFqEEuCso3B8K7AAcMjctwG_xfCxO2PdKzGd_-hg"
+      short-id: "f129dcdbf64f"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-071"
+    type: "vless"
+    server: "138.124.115.157"
+    port: 8443
+    uuid: "1a9697ff-7355-441e-b5cf-2a04a2bddb3c"
+    udp: true
+    tls: true
+    servername: "cdnjs.cloudflare.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "98bPbnTMaIggqGBejgGksWFzY8pnfb7frswwz5QwkUg"
+      short-id: "9b1d60f58884a3e3"
+    network: "tcp"
+  - name: "GP-072"
+    type: "vless"
+    server: "91.107.255.228"
+    port: 8443
+    uuid: "1b5ffa7d-ccc7-4489-aa9d-27ddbfc7f43d"
+    udp: true
+    tls: true
+    servername: "storage.googleapis.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "iMi_BgDPs17iBPlwmjXMbwjBmFLc2UpgR4_c-30FXSQ"
+      short-id: "82"
+    network: "tcp"
+  - name: "GP-073"
+    type: "vless"
+    server: "usself.yandex-api.com"
+    port: 443
+    uuid: "1b7ee703-fa08-4305-8469-ae3e30e61e44"
+    udp: true
+    tls: true
+    servername: "usself.yandex-api.com"
+    client-fingerprint: "random"
+    reality-opts:
+      public-key: "HXFe_cPryw01zqXchAFjZciDAS4UJg1-xScx6vjgjjY"
+      short-id: "7f2e9c4b1a8d6e25"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-074"
+    type: "vless"
+    server: "62.152.58.90"
+    port: 443
+    uuid: "1bb2af63-4472-44ed-9c70-8f316258b68b"
+    udp: true
+    tls: true
+    servername: "360.yandex.ru"
+    client-fingerprint: "random"
+    reality-opts:
+      public-key: "JBKJlzuJH1YzDHAoz28wEKbzWTGpDpKjgtSq0oT0a0k"
+      short-id: "27e53bbcab7593d7"
+    network: "grpc"
+    grpc-opts:
+      grpc-service-name: ""
+  - name: "GP-075"
+    type: "vless"
+    server: "81.94.148.75"
+    port: 8443
+    uuid: "1bc9225a-9da7-4e5c-8657-d9e6cadeba9e"
+    udp: true
+    tls: true
+    servername: "ads.x5.ru"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "DaIRouGSxxQDEv9WKRxD79b2Vt0fsw4yQOTeAmXUYCM"
+      short-id: "08"
+    network: "grpc"
+    grpc-opts:
+      grpc-service-name: "ads.x5.ru"
+  - name: "GP-076"
+    type: "vless"
+    server: "144.31.50.236"
+    port: 443
+    uuid: "1c332eae-7e02-4acd-996d-4eb3e652401c"
+    udp: true
+    tls: true
+    servername: "yandex.ru"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "uitO4Z8t9TplwwYaqwLqh5rfxDh_X8bOBiNuPbzvaEM"
+      short-id: "bbe46bd8f6b96839"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-077"
+    type: "vless"
+    server: "prep.wwwinternetvideo.click"
+    port: 443
+    uuid: "1c332eae-7e02-4acd-996d-4eb3e652401c"
+    udp: true
+    tls: true
+    servername: "yandex.ru"
+    reality-opts:
+      public-key: "uitO4Z8t9TplwwYaqwLqh5rfxDh_X8bOBiNuPbzvaEM"
+      short-id: "bbe46bd8f6b96839"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-078"
+    type: "vless"
+    server: "130.17.25.67"
+    port: 443
+    uuid: "1c5ed2e1-56da-41ab-9a78-159d9892ec17"
+    udp: true
+    tls: true
+    servername: "github.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "lHCkAu_DOVFtE-iL2JGrPt44QeTCFijXuRfuGaSni3Q"
+      short-id: "9e4eced6e98ed4d4"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-079"
+    type: "vless"
+    server: "185.147.26.210"
+    port: 443
+    uuid: "1c5ed2e1-56da-41ab-9a78-159d9892ec17"
+    udp: true
+    tls: true
+    servername: "example.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "9rdvkUGJyNbRvsB0Pp06h1URq9AHDPRtH9-wmNB1-j4"
+      short-id: "e4aa362b5f9d07d7"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-080"
+    type: "vless"
+    server: "194.113.235.66"
+    port: 443
+    uuid: "1c5ed2e1-56da-41ab-9a78-159d9892ec17"
+    udp: true
+    tls: true
+    servername: "github.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "lHCkAu_DOVFtE-iL2JGrPt44QeTCFijXuRfuGaSni3Q"
+      short-id: "9e4eced6e98ed4d4"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-081"
+    type: "vless"
+    server: "194.113.235.66"
+    port: 443
+    uuid: "1c5ed2e1-56da-41ab-9a78-159d9892ec17"
+    udp: true
+    tls: true
+    servername: "github.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "lHCkAu_DOVFtE-iL2JGrPt44QeTCFijXuRfuGaSni3Q"
+      short-id: "9e4eced6e98ed4d4"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-082"
+    type: "vless"
+    server: "194.113.235.66"
+    port: 443
+    uuid: "1c5ed2e1-56da-41ab-9a78-159d9892ec17"
+    udp: true
+    tls: true
+    servername: "github.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "lHCkAu_DOVFtE-iL2JGrPt44QeTCFijXuRfuGaSni3Q"
+      short-id: "9e4eced6e98ed4d4"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-083"
+    type: "vless"
+    server: "81.177.215.175"
+    port: 443
+    uuid: "1c5ed2e1-56da-41ab-9a78-159d9892ec17"
+    udp: true
+    tls: true
+    servername: "github.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "lHCkAu_DOVFtE-iL2JGrPt44QeTCFijXuRfuGaSni3Q"
+      short-id: "9e4eced6e98ed4d4"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-084"
+    type: "vless"
+    server: "95.216.27.15"
+    port: 2053
+    uuid: "1c81f6d3-5771-4c5d-9fdd-1655eff50634"
+    udp: true
+    tls: true
+    servername: "www.google.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "4nfogj5mHqNowtSn_2sXS3xTX8vcH75rFEU2BWvyekM"
+      short-id: "d368b94e275ab080"
+    network: "tcp"
+  - name: "GP-085"
+    type: "vless"
+    server: "95.216.27.15"
+    port: 2053
+    uuid: "1c81f6d3-5771-4c5d-9fdd-1655eff50634"
+    udp: true
+    tls: true
+    servername: "www.google.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "4nfogj5mHqNowtSn_2sXS3xTX8vcH75rFEU2BWvyekM"
+      short-id: "d368b94e275ab080"
+    network: "tcp"
+  - name: "GP-086"
+    type: "vless"
+    server: "107.173.237.146"
+    port: 8443
+    uuid: "1d39f715-2740-4d99-bc3b-197cc48dcee7"
+    udp: true
+    tls: true
+    servername: "updates.cdn-apple.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "D3ojIs3AUKP_tV0E4TEjh90HBVJp24Nq3qMfdxD30kc"
+      short-id: "df8611c07d"
+    network: "tcp"
+  - name: "GP-087"
+    type: "vless"
+    server: "107.173.237.146"
+    port: 8443
+    uuid: "1d39f715-2740-4d99-bc3b-197cc48dcee7"
+    udp: true
+    tls: true
+    servername: "updates.cdn-apple.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "D3ojIs3AUKP_tV0E4TEjh90HBVJp24Nq3qMfdxD30kc"
+      short-id: "df8611c07d"
+    network: "tcp"
+  - name: "GP-088"
+    type: "vless"
+    server: "194.61.31.126"
+    port: 2053
+    uuid: "1d4e18bd-1f26-4915-b35a-7ace4826e76a"
+    udp: true
+    tls: true
+    servername: "www.apple.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "PuAGLfJy6cu1TNoHuKIKSxPetCbZI41fc8hQDjWPIAU"
+      short-id: "9980e0609b0d3891"
+    network: "tcp"
+  - name: "GP-089"
+    type: "vless"
+    server: "194.61.31.126"
+    port: 2053
+    uuid: "1d4e18bd-1f26-4915-b35a-7ace4826e76a"
+    udp: true
+    tls: true
+    servername: "www.apple.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "PuAGLfJy6cu1TNoHuKIKSxPetCbZI41fc8hQDjWPIAU"
+      short-id: "9980e0609b0d3891"
+    network: "raw"
+  - name: "GP-090"
+    type: "vless"
+    server: "194.61.31.126"
+    port: 2053
+    uuid: "1d4e18bd-1f26-4915-b35a-7ace4826e76a"
+    udp: true
+    tls: true
+    servername: "www.apple.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "PuAGLfJy6cu1TNoHuKIKSxPetCbZI41fc8hQDjWPIAU"
+      short-id: "9980e0609b0d3891"
+    network: "tcp"
+  - name: "GP-091"
+    type: "vless"
+    server: "194.61.31.126"
+    port: 2053
+    uuid: "1d4e18bd-1f26-4915-b35a-7ace4826e76a"
+    udp: true
+    tls: true
+    servername: "www.apple.com"
+    client-fingerprint: "random"
+    reality-opts:
+      public-key: "PuAGLfJy6cu1TNoHuKIKSxPetCbZI41fc8hQDjWPIAU"
+      short-id: "9980e0609b0d3891"
+    network: "tcp"
+  - name: "GP-092"
+    type: "vless"
+    server: "194.61.31.126"
+    port: 2053
+    uuid: "1d4e18bd-1f26-4915-b35a-7ace4826e76a"
+    udp: true
+    tls: true
+    servername: "www.apple.com"
+    reality-opts:
+      public-key: "PuAGLfJy6cu1TNoHuKIKSxPetCbZI41fc8hQDjWPIAU"
+      short-id: "9980e0609b0d3891"
+    network: "tcp"
+  - name: "GP-093"
+    type: "vless"
+    server: "194.61.31.126"
+    port: 2053
+    uuid: "1d4e18bd-1f26-4915-b35a-7ace4826e76a"
+    udp: true
+    tls: true
+    servername: "www.apple.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "PuAGLfJy6cu1TNoHuKIKSxPetCbZI41fc8hQDjWPIAU"
+      short-id: "9980e0609b0d3891"
+    network: "tcp"
+  - name: "GP-094"
+    type: "vless"
+    server: "omg.herumhas.shop"
+    port: 5443
+    uuid: "1e06c388-d31c-420e-916a-94a990648e34"
+    udp: true
+    tls: true
+    servername: "max.ru"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "LGcG8Sqv5vPDypbaEgHV0ZGqQOBkgDepPWXyDohbVXQ"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-095"
+    type: "vless"
+    server: "185.95.231.156"
+    port: 443
+    uuid: "1f8cf47a-b66a-4916-979f-26edfcf44eea"
+    udp: true
+    tls: true
+    servername: "www.apple.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "8eXftARun6KH38UZhuqIfPR1VF2DLS9RMBZEnF5k6To"
+      short-id: "a3a578ab"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-096"
+    type: "vless"
+    server: "185.95.231.156"
+    port: 443
+    uuid: "1f8cf47a-b66a-4916-979f-26edfcf44eea"
+    udp: true
+    tls: true
+    servername: "www.apple.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "8eXftARun6KH38UZhuqIfPR1VF2DLS9RMBZEnF5k6To"
+      short-id: "a3a578ab"
+    flow: "xtls-rprx-vision"
+    network: "raw"
+  - name: "GP-097"
+    type: "vless"
+    server: "185.95.231.156"
+    port: 443
+    uuid: "1f8cf47a-b66a-4916-979f-26edfcf44eea"
+    udp: true
+    tls: true
+    servername: "www.apple.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "8eXftARun6KH38UZhuqIfPR1VF2DLS9RMBZEnF5k6To"
+      short-id: "a3a578ab"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-098"
+    type: "vless"
+    server: "185.95.231.156"
+    port: 443
+    uuid: "1f8cf47a-b66a-4916-979f-26edfcf44eea"
+    udp: true
+    tls: true
+    servername: "www.apple.com"
+    client-fingerprint: "random"
+    reality-opts:
+      public-key: "8eXftARun6KH38UZhuqIfPR1VF2DLS9RMBZEnF5k6To"
+      short-id: "a3a578ab"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-099"
+    type: "vless"
+    server: "185.95.231.156"
+    port: 443
+    uuid: "1f8cf47a-b66a-4916-979f-26edfcf44eea"
+    udp: true
+    tls: true
+    servername: "www.apple.com"
+    reality-opts:
+      public-key: "8eXftARun6KH38UZhuqIfPR1VF2DLS9RMBZEnF5k6To"
+      short-id: "a3a578ab"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-100"
+    type: "vless"
+    server: "185.95.231.233"
+    port: 443
+    uuid: "1ffa8e68-3378-4cf4-b8f6-44bf3d46d106"
+    udp: true
+    tls: true
+    servername: "store.steampowered.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "r4Dp3mztZaizbDk28rEOkLikk7erR9dzzc-Jrsgraho"
+      short-id: "a1b2c3d4"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-101"
+    type: "vless"
+    server: "193.148.59.178"
+    port: 443
+    uuid: "20d7c485-5d24-49b5-a5cc-bb7a7daf9908"
+    udp: true
+    tls: true
+    servername: "www.apple.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "-GMpCber8qtrKzJbwvpLcwlIhOy-5zS66u_x9lLvIjE"
+      short-id: "e3daad69"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-102"
+    type: "vless"
+    server: "193.148.59.178"
+    port: 443
+    uuid: "20d7c485-5d24-49b5-a5cc-bb7a7daf9908"
+    udp: true
+    tls: true
+    servername: "www.apple.com"
+    client-fingerprint: "random"
+    reality-opts:
+      public-key: "-GMpCber8qtrKzJbwvpLcwlIhOy-5zS66u_x9lLvIjE"
+      short-id: "e3daad69"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-103"
+    type: "vless"
+    server: "108.61.164.217"
+    port: 4443
+    uuid: "20dd9433-389e-4573-ba7b-689619cf13da"
+    udp: true
+    tls: true
+    servername: "www.samsung.com"
+    reality-opts:
+      public-key: "k9srkQedwHsZGJP-R-GGwDOGok05gk23s8d4mtidMC4"
+      short-id: "835391010667297d"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-104"
+    type: "vless"
+    server: "45.159.79.71"
+    port: 4443
+    uuid: "20dd9433-389e-4573-ba7b-689619cf13da"
+    udp: true
+    tls: true
+    servername: "sentry.io"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "321Ii2xbCoyll6WJ0Qm1Sh8qcC0kxXvUaZhe3kyasD8"
+      short-id: "a1b2c3d4e5f6a7b8"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-105"
+    type: "vless"
+    server: "89.169.53.176"
+    port: 4443
+    uuid: "20dd9433-389e-4573-ba7b-689619cf13da"
+    udp: true
+    tls: true
+    servername: "gateway.icloud.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "YIyohkkCU5kw6J5iZYZkhILyDwlfftFPDTkbITlrAUw"
+      short-id: "df3aff719526dc5a"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-106"
+    type: "vless"
+    server: "pq.aws67.yydjc.top"
+    port: 443
+    uuid: "2175f4b6-ae60-4c9c-b0ea-6a9c96eecb75"
+    udp: true
+    tls: true
+    servername: "updates.cdn-apple.com"
+    client-fingerprint: "safari"
+    reality-opts:
+      public-key: "iusZvFfHH5OJ6sAPFF6e7Km9WP0nmWfjXXfhTQuSR24"
+      short-id: "8b6e932c"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-107"
+    type: "vless"
+    server: "49.12.212.19"
+    port: 2434
+    uuid: "21854465-54dd-474d-8a94-9ca112c24694"
+    udp: true
+    tls: true
+    servername: "icloud.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "yzCvRpbQ-cRePaJAuQkw42_xEf-R860gFsQwoPki2E0"
+      short-id: "9de041877612a718"
+    network: "tcp"
+  - name: "GP-108"
+    type: "vless"
+    server: "216.227.161.95"
+    port: 7443
+    uuid: "218fd696-e3a2-4c33-b397-a5f13a82969e"
+    udp: true
+    tls: true
+    servername: "media3.abvphelp.cc"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "uNqGvaJEIFTFQvAxsTDhetPxkIWzJuBtxXsK0yFMYzM"
+      short-id: "48d5cf47"
+    network: "grpc"
+    grpc-opts:
+      grpc-service-name: "grpc"
+  - name: "GP-109"
+    type: "vless"
+    server: "103.27.157.120"
+    port: 443
+    uuid: "2412bd96-925b-43f2-81d1-0ed4f0793699"
+    udp: true
+    tls: true
+    servername: "download.amd.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "k0883nIGfstbzb8hES-dQ1yPcBwbUbnsyg4w-UA5gkA"
+      short-id: "68aaa5222092bbea"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-110"
+    type: "vless"
+    server: "31.207.7.74"
+    port: 443
+    uuid: "2412bd96-925b-43f2-81d1-0ed4f0793699"
+    udp: true
+    tls: true
+    servername: "pkg.go.dev"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "RDL0RVmgFM3fdqXRSHBF2A53YF9TPFu2aeJQhMTaY3s"
+      short-id: "457ae5b8bef4d1b3"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-111"
+    type: "vless"
+    server: "78.135.73.47"
+    port: 443
+    uuid: "25e16692-d097-4e69-9e2d-8415609c1968"
+    udp: true
+    tls: true
+    servername: "www.datadoghq.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "sZAJkAu23wp1WKY-qeaeiwR38izP5OyfhumoE9xhbB8"
+      short-id: "f46cd3ea3d1eb72d"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-112"
+    type: "vless"
+    server: "78.135.73.47"
+    port: 443
+    uuid: "25e16692-d097-4e69-9e2d-8415609c1968"
+    udp: true
+    tls: true
+    servername: "www.datadoghq.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "sZAJkAu23wp1WKY-qeaeiwR38izP5OyfhumoE9xhbB8"
+      short-id: "f46cd3ea3d1eb72d"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-113"
+    type: "vless"
+    server: "us-lax-dc12-005.node.valaccess.com"
+    port: 443
+    uuid: "29794dae-06ca-4b62-94f2-220b5858d39b"
+    udp: true
+    tls: true
+    servername: "www.speedtest.net"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "i7FRaArcUxL2_qo-MZHANck17kt3MGfJ36LTXfxfzjg"
+      short-id: "0ea827164b58a9f7"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-114"
+    type: "vless"
+    server: "46.137.202.178"
+    port: 12512
+    uuid: "2a6c617d-98e4-49c3-95ab-76f02fcf0150"
+    udp: true
+    tls: true
+    servername: "www.intel.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "sO0RBMr_l8TLtZaYBX8n3NdI9AtaugUqJpCR1szNsyA"
+      short-id: "e692a8250d2e2fd0"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-115"
+    type: "vless"
+    server: "46.137.202.178"
+    port: 12512
+    uuid: "2a6c617d-98e4-49c3-95ab-76f02fcf0150"
+    udp: true
+    tls: true
+    servername: "www.intel.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "sO0RBMr_l8TLtZaYBX8n3NdI9AtaugUqJpCR1szNsyA"
+      short-id: "e692a8250d2e2fd0"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-116"
+    type: "vless"
+    server: "46.137.202.178"
+    port: 12512
+    uuid: "2a6c617d-98e4-49c3-95ab-76f02fcf0150"
+    udp: true
+    tls: true
+    servername: "www.intel.com"
+    client-fingerprint: "firefox"
+    reality-opts:
+      public-key: "sO0RBMr_l8TLtZaYBX8n3NdI9AtaugUqJpCR1szNsyA"
+      short-id: "e692a8250d2e2fd0"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-117"
+    type: "vless"
+    server: "46.137.202.178"
+    port: 12512
+    uuid: "2a6c617d-98e4-49c3-95ab-76f02fcf0150"
+    udp: true
+    tls: true
+    servername: "www.intel.com"
+    client-fingerprint: "ios"
+    reality-opts:
+      public-key: "sO0RBMr_l8TLtZaYBX8n3NdI9AtaugUqJpCR1szNsyA"
+      short-id: "e692a8250d2e2fd0"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-118"
+    type: "vless"
+    server: "46.137.202.178"
+    port: 12512
+    uuid: "2a6c617d-98e4-49c3-95ab-76f02fcf0150"
+    udp: true
+    tls: true
+    servername: "www.intel.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "sO0RBMr_l8TLtZaYBX8n3NdI9AtaugUqJpCR1szNsyA"
+      short-id: "e692a8250d2e2fd0"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+  - name: "GP-119"
+    type: "vless"
+    server: "154.12.38.202"
+    port: 443
+    uuid: "2a9ab69b-26e7-44d0-a325-e5056d849900"
+    udp: true
+    tls: true
+    servername: "itunes.apple.com"
+    reality-opts:
+      public-key: "iJDZHJQcTGl2VIwbsRmlOG9JGbbmxNY5wmv1hc6OwQM"
+      short-id: "c31176b6"
+    network: "ws"
+    ws-opts:
+      path: "/ws"
+      headers:
+        Host: "itunes.apple.com"
+  - name: "GP-120"
+    type: "vless"
+    server: "107.181.151.241"
+    port: 443
+    uuid: "2ba7f500-017b-4891-87a0-e4e62a4ad52d"
+    udp: true
+    tls: true
+    servername: "www.microsoft.com"
+    client-fingerprint: "chrome"
+    reality-opts:
+      public-key: "FjcEZNQ8t5E4R04_11T6ghsOutdqwKKrelkuadakoQg"
+      short-id: "9409f73c2fd7"
+    flow: "xtls-rprx-vision"
+    network: "tcp"

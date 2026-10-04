@@ -6,9 +6,9 @@ log-level: warning
 proxy-providers:
   GlobalPulse:
     type: http
-    url: "https://raw.githubusercontent.com/evgeniivolk831-ai/Vpn/main/output/GlobalPulse-Base64.txt"
+    url: "https://raw.githubusercontent.com/evgeniivolk831-ai/Vpn/main/output/GlobalPulse-Clash.yaml"
     interval: 900
-    path: ./providers/globalpulse.txt
+    path: ./providers/globalpulse.yaml
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -34,6 +34,7 @@ proxy-groups:
     interval: 120
     timeout: 5000
     lazy: false
+    max-failed-times: 2
 
   - name: "PROXY"
     type: select

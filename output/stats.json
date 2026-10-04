@@ -9,7 +9,7 @@
     },
     "0xRadikal-verified": {
       "ok": true,
-      "nodes": 1305,
+      "nodes": 1289,
       "url": "https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/verified/configs_base64.txt"
     },
     "morpheus-best": {
@@ -23,11 +23,13 @@
       "url": "https://dfantomasd.github.io/MyVPN-subscription/public/karing.txt"
     }
   },
-  "unique_nodes": 4701,
-  "vless_nodes": 150,
+  "unique_nodes": 4690,
+  "vless_nodes": 120,
+  "clash_convertible_vless": 120,
   "published_all": 200,
-  "published_vless": 150,
+  "published_vless": 120,
   "local_auto_selection": true,
   "local_healthcheck_interval_seconds": 180,
-  "note": "Upstream CI verification cannot prove reachability from every ISP. The generated Clash/Mihomo profile re-tests nodes from the user's network and auto-selects a live one."
+  "failover_interval_seconds": 120,
+  "note": "Upstream source verification is not equivalent to reachability from every ISP. Mihomo performs local HTTP health checks and automatic failover from the user's network."
 }
