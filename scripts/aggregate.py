@@ -326,14 +326,28 @@ def endpoint_key(uri: str) -> str | None:
 # URI variants of one server:port from consuming the health-check budget.
 candidate_vless: list[str] = []
 candidate_endpoints: set[str] = set()
+duplicate_fallback: list[str] = []
+
 for node in vless_unique:
     endpoint = endpoint_key(node)
-    if endpoint is None or endpoint in candidate_endpoints:
+    if endpoint is None:
         continue
-    candidate_endpoints.add(endpoint)
-    candidate_vless.append(node)
+    if endpoint not in candidate_endpoints:
+        candidate_endpoints.add(endpoint)
+        candidate_vless.append(node)
+    else:
+        duplicate_fallback.append(node)
+
     if len(candidate_vless) >= MAX_CANDIDATE_VLESS:
         break
+
+# If there are fewer distinct endpoints than the E2E budget, fill the
+# remaining slots with additional URI variants. Diversity is preferred,
+# but duplicates are allowed when they provide additional transport/SNI/
+# Reality parameter variants.
+if len(candidate_vless) < MAX_CANDIDATE_VLESS:
+    remaining = MAX_CANDIDATE_VLESS - len(candidate_vless)
+    candidate_vless.extend(duplicate_fallback[:remaining])
 
 all_top = unique[:MAX_ALL]
 
