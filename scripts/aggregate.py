@@ -313,11 +313,12 @@ all_top = unique[:MAX_ALL]
 
 reachable_vless, checked_vless = filter_reachable(candidate_vless)
 
-e2e_file = Path(os.environ.get("E2E_RESULTS_FILE", OUT / "e2e-vless.json"))
+e2e_file_env = os.environ.get("E2E_RESULTS_FILE")
+e2e_file = Path(e2e_file_env) if e2e_file_env else None
 e2e_verified: list[str] = []
 e2e_tested = 0
 e2e_passed = 0
-if e2e_file.exists():
+if e2e_file is not None and e2e_file.exists():
     try:
         e2e_data = json.loads(e2e_file.read_text(encoding="utf-8"))
         e2e_tested = int(e2e_data.get("tested", 0))
@@ -348,8 +349,8 @@ if e2e_file.exists():
     except (OSError, ValueError, TypeError, json.JSONDecodeError) as exc:
         raise RuntimeError(f"FAIL_CLOSED: invalid E2E results: {exc}") from exc
 
-publish_pool = e2e_verified if e2e_file.exists() else reachable_vless
-if e2e_file.exists() and not e2e_verified:
+publish_pool = e2e_verified if e2e_file is not None and e2e_file.exists() else reachable_vless
+if e2e_file is not None and e2e_file.exists() and not e2e_verified:
     raise RuntimeError("FAIL_CLOSED: E2E check produced zero verified VLESS nodes")
 
 proxies = []
