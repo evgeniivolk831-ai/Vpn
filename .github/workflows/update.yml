@@ -47,7 +47,18 @@ jobs:
               raise SystemExit(f"FAIL_CLOSED: only {len(proxies)} published proxies")
           if len(proxies) > 120:
               raise SystemExit(f"FAIL_CLOSED: {len(proxies)} proxies exceeds target 120")
-          print(f"Generated YAML is valid; published proxies: {len(proxies)}")
+          import base64
+          subscription = Path("output/GlobalPulse-Subscription.txt").read_text(encoding="utf-8").strip()
+          try:
+              decoded = base64.b64decode(subscription + "=" * (-len(subscription) % 4), validate=True).decode("utf-8")
+          except Exception as exc:
+              raise SystemExit(f"Invalid Base64 subscription: {exc}")
+          lines = [line.strip() for line in decoded.splitlines() if line.strip()]
+          if len(lines) < 100 or len(lines) > 120:
+              raise SystemExit(f"FAIL_CLOSED: Base64 subscription has {len(lines)} nodes")
+          if not all(line.lower().startswith("vless://") for line in lines):
+              raise SystemExit("FAIL_CLOSED: Base64 subscription contains non-VLESS entries")
+          print(f"Generated YAML is valid; published proxies: {len(proxies)}; Base64 VLESS subscription: {len(lines)}")
           PY
 
       - name: Commit changed feeds
