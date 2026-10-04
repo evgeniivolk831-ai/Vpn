@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - "scripts/aggregate.py"
+      - "scripts/e2e_vless_check.py"
       - ".github/workflows/update.yml"
   schedule:
     - cron: "17 * * * *"
@@ -86,9 +87,12 @@ jobs:
               raise SystemExit("FAIL_CLOSED: Base64 subscription contains non-VLESS entries")
           stats = __import__("json").loads(Path("output/stats.json").read_text(encoding="utf-8"))
           e2e = stats.get("e2e_verified_vless", 0)
+          v2rayng = stats.get("published_v2rayng", 0)
           if e2e < 1:
               raise SystemExit("FAIL_CLOSED: no end-to-end verified VLESS nodes")
-          print(f"Generated YAML is valid; E2E-verified proxies: {len(proxies)}; Base64 VLESS subscription: {len(lines)}")
+          if v2rayng < 50:
+              raise SystemExit(f"FAIL_CLOSED: only {v2rayng} stable unique-endpoint nodes; target is 50")
+          print(f"Generated YAML is valid; E2E-stable proxies: {len(proxies)}; Base64 VLESS subscription: {len(lines)}; v2rayNG unique endpoints: {v2rayng}")
           PY
 
       - name: Commit changed feeds
