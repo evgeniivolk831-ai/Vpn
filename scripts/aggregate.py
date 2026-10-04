@@ -301,9 +301,10 @@ write_lines(OUT / "GlobalPulse-VLESS.txt", vless)
 write_lines(OUT / "GlobalPulse-All.txt", all_top)
 
 encoded = base64.b64encode(
-    "\n".join(all_top).encode("utf-8")
+    "\n".join(vless).encode("utf-8")
 ).decode("ascii")
 write_lines(OUT / "GlobalPulse-Base64.txt", [encoded])
+write_lines(OUT / "GlobalPulse-Subscription.txt", [encoded])
 
 write_lines(
     OUT / "GlobalPulse-Clash.yaml",
@@ -376,7 +377,8 @@ stats = {
     "vless_nodes": len(vless),
     "candidate_vless": len(candidate_vless),
     "published_keys_target": PUBLISHED_KEYS,
-    "subscription": "output/GlobalPulse-Subscription.yaml",
+    "subscription": "output/GlobalPulse-Subscription.txt",
+    "mihomo_subscription": "output/GlobalPulse-Subscription.yaml",
     "clash_convertible_vless": len(proxies),
     "published_all": len(all_top),
     "published_vless": len(vless),
