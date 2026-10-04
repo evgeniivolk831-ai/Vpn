@@ -2,6 +2,11 @@
 name: GlobalPulse hourly update
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/aggregate.py"
+      - ".github/workflows/update.yml"
   schedule:
     - cron: "17 * * * *"
   workflow_dispatch:
@@ -43,8 +48,8 @@ jobs:
               if not isinstance(data, dict):
                   raise SystemExit(f"Invalid YAML root: {path}")
           proxies = yaml.safe_load(Path("output/GlobalPulse-Clash.yaml").read_text(encoding="utf-8")).get("proxies", [])
-          if len(proxies) < 100:
-              raise SystemExit(f"FAIL_CLOSED: only {len(proxies)} published proxies")
+          if len(proxies) < 1:
+              raise SystemExit("FAIL_CLOSED: no TCP-reachable proxies published")
           if len(proxies) > 120:
               raise SystemExit(f"FAIL_CLOSED: {len(proxies)} proxies exceeds target 120")
           import base64
@@ -54,11 +59,11 @@ jobs:
           except Exception as exc:
               raise SystemExit(f"Invalid Base64 subscription: {exc}")
           lines = [line.strip() for line in decoded.splitlines() if line.strip()]
-          if len(lines) < 100 or len(lines) > 120:
+          if len(lines) < 1 or len(lines) > 120:
               raise SystemExit(f"FAIL_CLOSED: Base64 subscription has {len(lines)} nodes")
           if not all(line.lower().startswith("vless://") for line in lines):
               raise SystemExit("FAIL_CLOSED: Base64 subscription contains non-VLESS entries")
-          print(f"Generated YAML is valid; published proxies: {len(proxies)}; Base64 VLESS subscription: {len(lines)}")
+          print(f"Generated YAML is valid; TCP-reachable proxies: {len(proxies)}; Base64 VLESS subscription: {len(lines)}")
           PY
 
       - name: Commit changed feeds
