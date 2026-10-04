@@ -2,7 +2,6 @@
 # scripts/e2e_vless_check.py
 import argparse
 import json
-import os
 import socket
 import subprocess
 import tempfile
@@ -20,6 +19,8 @@ ATTEMPTS = 3
 TIMEOUT_SECONDS = 8
 WORKERS = 8
 BASE_PORT = 21000
+SUPPORTED_NETWORKS = {"tcp", "ws", "grpc", "httpupgrade"}
+SUPPORTED_SECURITY = {"none", "tls", "reality"}
 
 
 def parse_vless(uri: str) -> dict | None:
@@ -31,7 +32,13 @@ def parse_vless(uri: str) -> dict | None:
         get = lambda k: urllib.parse.unquote(q[k][0]) if q.get(k) else None
         security = (get("security") or "none").lower()
         network = (get("type") or "tcp").lower()
-        if security != "reality" or network != "tcp" or not get("pbk") or not get("sni"):
+        if security not in SUPPORTED_SECURITY or network not in SUPPORTED_NETWORKS:
+            return None
+        if security == "reality" and (not get("pbk") or not get("sni")):
+            return None
+        if security == "tls" and not get("sni"):
+            return None
+        if network == "grpc" and not get("serviceName"):
             return None
         return {
             "address": p.hostname,
@@ -42,17 +49,64 @@ def parse_vless(uri: str) -> dict | None:
             "fingerprint": get("fp") or "chrome",
             "publicKey": get("pbk"),
             "shortId": get("sid") or "",
+            "network": network,
+            "security": security,
+            "path": get("path") or "/",
+            "host": get("host") or get("sni") or p.hostname,
+            "serviceName": get("serviceName") or "",
         }
     except (ValueError, TypeError):
         return None
 
 
+def build_stream_settings(parsed: dict) -> dict:
+    network = parsed["network"]
+    security = parsed["security"]
+    stream: dict = {"network": network}
+
+    if network == "ws":
+        stream["wsSettings"] = {
+            "path": parsed["path"],
+            "headers": {"Host": parsed["host"]},
+        }
+    elif network == "grpc":
+        stream["grpcSettings"] = {
+            "serviceName": parsed["serviceName"],
+            "multiMode": False,
+        }
+    elif network == "httpupgrade":
+        stream["httpupgradeSettings"] = {
+            "path": parsed["path"],
+            "host": parsed["host"],
+        }
+
+    if security == "tls":
+        stream["security"] = "tls"
+        stream["tlsSettings"] = {
+            "serverName": parsed["serverName"],
+            "fingerprint": parsed["fingerprint"],
+        }
+    elif security == "reality":
+        stream["security"] = "reality"
+        stream["realitySettings"] = {
+            "serverName": parsed["serverName"],
+            "fingerprint": parsed["fingerprint"],
+            "publicKey": parsed["publicKey"],
+            "shortId": parsed["shortId"],
+        }
+    else:
+        stream["security"] = "none"
+
+    return stream
+
+
 def check_one(xray: str, uri: str, port: int) -> dict:
     parsed = parse_vless(uri)
-    started = time.monotonic()
     result = {
         "uri": uri,
         "status": "UNSUPPORTED",
+        "transport": None,
+        "security": None,
         "latency_ms": None,
         "median_latency_ms": None,
         "p95_latency_ms": None,
@@ -63,6 +117,9 @@ def check_one(xray: str, uri: str, port: int) -> dict:
     }
     if not parsed:
         return result
+
+    result["transport"] = parsed["network"]
+    result["security"] = parsed["security"]
 
     config = {
         "log": {"loglevel": "error"},
@@ -85,16 +142,7 @@ def check_one(xray: str, uri: str, port: int) -> dict:
                     }],
                 }]
             },
-            "streamSettings": {
-                "network": "tcp",
-                "security": "reality",
-                "realitySettings": {
-                    "serverName": parsed["serverName"],
-                    "fingerprint": parsed["fingerprint"],
-                    "publicKey": parsed["publicKey"],
-                    "shortId": parsed["shortId"],
-                },
-            },
+            "streamSettings": build_stream_settings(parsed),
         }],
     }
 
@@ -152,6 +200,7 @@ def check_one(xray: str, uri: str, port: int) -> dict:
                             errors.append((curl.stderr or curl.stdout)[-240:].strip())
                     except subprocess.TimeoutExpired as exc:
                         errors.append(str(exc))
+
             result["attempts"] = total
             result["passed_attempts"] = passed
             result["success_rate"] = round(passed / total, 3) if total else 0.0
@@ -164,6 +213,7 @@ def check_one(xray: str, uri: str, port: int) -> dict:
                 )
                 p95_index = min(len(ordered) - 1, max(0, int(len(ordered) * 0.95) - 1))
                 result["p95_latency_ms"] = round(ordered[p95_index], 1)
+
             if passed == total and total > 0:
                 result["status"] = "E2E_PASS"
             else:
@@ -212,6 +262,8 @@ def main() -> int:
         "engine": "xray-core",
         "test_urls": list(TEST_URLS),
         "attempts_per_target": ATTEMPTS,
+        "supported_networks": sorted(SUPPORTED_NETWORKS),
+        "supported_security": sorted(SUPPORTED_SECURITY),
         "tested": len(results),
         "e2e_pass": sum(r["status"] == "E2E_PASS" for r in results),
         "e2e_fail": sum(r["status"] == "E2E_FAIL" for r in results),
