@@ -37,11 +37,17 @@ jobs:
           for path in [
               Path("output/GlobalPulse-Clash.yaml"),
               Path("output/GlobalPulse-Auto-Clash.yaml"),
+              Path("output/GlobalPulse-Subscription.yaml"),
           ]:
               data = yaml.safe_load(path.read_text(encoding="utf-8"))
               if not isinstance(data, dict):
                   raise SystemExit(f"Invalid YAML root: {path}")
-          print("Generated YAML is syntactically valid.")
+          proxies = yaml.safe_load(Path("output/GlobalPulse-Clash.yaml").read_text(encoding="utf-8")).get("proxies", [])
+          if len(proxies) < 100:
+              raise SystemExit(f"FAIL_CLOSED: only {len(proxies)} published proxies")
+          if len(proxies) > 120:
+              raise SystemExit(f"FAIL_CLOSED: {len(proxies)} proxies exceeds target 120")
+          print(f"Generated YAML is valid; published proxies: {len(proxies)}")
           PY
 
       - name: Commit changed feeds

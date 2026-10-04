@@ -13,6 +13,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 
 MAX_CANDIDATE_VLESS = 300
 PUBLISHED_KEYS = 120
+MIN_PUBLISHED_KEYS = 100
 MAX_ALL = 200
 HEALTHCHECK_URL = "https://www.gstatic.com/generate_204"
 
@@ -277,14 +278,6 @@ candidate_vless = [
 ][:MAX_CANDIDATE_VLESS]
 all_top = unique[:MAX_ALL]
 
-write_lines(OUT / "GlobalPulse-VLESS.txt", vless)
-write_lines(OUT / "GlobalPulse-All.txt", all_top)
-
-encoded = base64.b64encode(
-    "\n".join(all_top).encode("utf-8")
-).decode("ascii")
-write_lines(OUT / "GlobalPulse-Base64.txt", [encoded])
-
 proxies = []
 vless = []
 for node in candidate_vless:
@@ -297,6 +290,20 @@ for node in candidate_vless:
     if proxy:
         proxies.append(proxy)
         vless.append(node)
+
+if len(proxies) < MIN_PUBLISHED_KEYS:
+    raise RuntimeError(
+        f"FAIL_CLOSED: only {len(proxies)} valid VLESS nodes; "
+        f"minimum is {MIN_PUBLISHED_KEYS}"
+    )
+
+write_lines(OUT / "GlobalPulse-VLESS.txt", vless)
+write_lines(OUT / "GlobalPulse-All.txt", all_top)
+
+encoded = base64.b64encode(
+    "\n".join(all_top).encode("utf-8")
+).decode("ascii")
+write_lines(OUT / "GlobalPulse-Base64.txt", [encoded])
 
 write_lines(
     OUT / "GlobalPulse-Clash.yaml",
@@ -311,6 +318,7 @@ provider_url = (
 clash = f"""mixed-port: 7890
 mode: rule
 allow-lan: false
+tcp-concurrent: true
 log-level: warning
 
 proxy-providers:
