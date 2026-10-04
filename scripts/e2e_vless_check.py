@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # scripts/e2e_vless_check.py
+# E2E coverage: VLESS TCP/WS/gRPC/HTTPUpgrade with none/TLS/Reality security.
 import argparse
 import json
 import socket
