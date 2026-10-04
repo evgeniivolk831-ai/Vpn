@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output"
 OUT.mkdir(parents=True, exist_ok=True)
 
-MAX_CANDIDATE_VLESS = 300
+MAX_CANDIDATE_VLESS = 600
 PUBLISHED_KEYS = 120
 V2RAYNG_PUBLISHED_KEYS = 50
 MIN_PUBLISHED_KEYS = 1
@@ -27,6 +27,7 @@ SOURCES = [
     ("Au1rxx-verified", "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt", "base64"),
     ("0xRadikal-verified", "https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/verified/configs_base64.txt", "base64"),
     ("morpheus-best", "https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt", "text"),
+    ("morpheus-reality", "https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/reality.txt", "text"),
     ("dfantomasd-karing", "https://dfantomasd.github.io/MyVPN-subscription/public/karing.txt", "base64"),
 ]
 
@@ -321,18 +322,25 @@ if e2e_file.exists():
         e2e_data = json.loads(e2e_file.read_text(encoding="utf-8"))
         e2e_tested = int(e2e_data.get("tested", 0))
         e2e_passed = int(e2e_data.get("e2e_pass", 0))
-        passed_latency = {
-            canonical_key(item["uri"]): float(item.get("latency_ms") or 10**9)
+        passed_metrics = {
+            canonical_key(item["uri"]): {
+                "success_rate": float(item.get("success_rate") or 0.0),
+                "median": float(item.get("median_latency_ms") or item.get("latency_ms") or 10**9),
+                "p95": float(item.get("p95_latency_ms") or 10**9),
+            }
             for item in e2e_data.get("results", [])
-            if item.get("status") == "E2E_PASS" and item.get("uri")
+            if item.get("uri")
         }
         e2e_verified = [
             node for node in reachable_vless
-            if canonical_key(node) in passed_latency
+            if canonical_key(node) in passed_metrics
+            and passed_metrics[canonical_key(node)]["success_rate"] >= 0.80
         ]
         e2e_verified.sort(
             key=lambda node: (
-                passed_latency[canonical_key(node)],
+                -passed_metrics[canonical_key(node)]["success_rate"],
+                passed_metrics[canonical_key(node)]["median"],
+                passed_metrics[canonical_key(node)]["p95"],
                 -protocol_score(node),
                 canonical_key(node),
             )
@@ -404,7 +412,7 @@ write_lines(
         "https://raw.githubusercontent.com/evgeniivolk831-ai/Vpn/main/output/GlobalPulse-v2rayNG.txt",
         "",
         f"Pool size target: {V2RAYNG_PUBLISHED_KEYS}",
-        "The feed is a curated subset of the E2E-verified pool, ranked by measured latency.",
+        "The feed is a stability-ranked subset: >=80% success across repeated probes and multiple HTTPS targets, with unique server:port endpoints preferred.",
         "",
         "Recommended v2rayNG settings:",
         "1. Enable automatic subscription update.",
@@ -493,9 +501,10 @@ stats = {
     "tcp_checked_vless": checked_vless,
     "tcp_reachable_vless": len(reachable_vless),
     "e2e_tested_vless": e2e_tested,
-    "e2e_verified_vless": e2e_passed,
+    "e2e_verified_vless": len(e2e_verified),
     "published_keys_target": PUBLISHED_KEYS,
     "v2rayng_published_keys_target": V2RAYNG_PUBLISHED_KEYS,
+    "v2rayng_unique_endpoints": len(v2rayng_vless),
     "subscription": "output/GlobalPulse-Subscription.txt",
     "v2rayng_subscription": "output/GlobalPulse-v2rayNG.txt",
     "v2rayng_setup": "output/GlobalPulse-v2rayNG-SETUP.txt",
