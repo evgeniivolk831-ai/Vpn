@@ -16,6 +16,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 
 MAX_CANDIDATE_VLESS = 300
 PUBLISHED_KEYS = 120
+V2RAYNG_PUBLISHED_KEYS = 50
 MIN_PUBLISHED_KEYS = 1
 MAX_ALL = 200
 HEALTHCHECK_URL = "https://www.gstatic.com/generate_204"
@@ -133,7 +134,6 @@ def filter_reachable(nodes: list[str]) -> tuple[list[str], int]:
             checked += 1
             if future.result():
                 reachable.append(futures[future])
-    # Preserve protocol score/order after concurrent checking.
     reachable.sort(key=lambda item: (-protocol_score(item), canonical_key(item)))
     return reachable, checked
 
@@ -330,7 +330,13 @@ if e2e_file.exists():
             node for node in reachable_vless
             if canonical_key(node) in passed_latency
         ]
-        e2e_verified.sort(key=lambda node: (passed_latency[canonical_key(node)], -protocol_score(node), canonical_key(node)))
+        e2e_verified.sort(
+            key=lambda node: (
+                passed_latency[canonical_key(node)],
+                -protocol_score(node),
+                canonical_key(node),
+            )
+        )
     except (OSError, ValueError, TypeError, json.JSONDecodeError) as exc:
         raise RuntimeError(f"FAIL_CLOSED: invalid E2E results: {exc}") from exc
 
@@ -357,6 +363,8 @@ if len(proxies) < MIN_PUBLISHED_KEYS:
         "refusing to publish a dead subscription"
     )
 
+v2rayng_vless = vless[:V2RAYNG_PUBLISHED_KEYS]
+
 write_lines(OUT / "GlobalPulse-VLESS.txt", vless)
 write_lines(OUT / "GlobalPulse-TCP-Reachable-VLESS.txt", reachable_vless)
 write_lines(OUT / "GlobalPulse-All.txt", all_top)
@@ -364,8 +372,38 @@ write_lines(OUT / "GlobalPulse-All.txt", all_top)
 encoded = base64.b64encode(
     "\n".join(vless).encode("utf-8")
 ).decode("ascii")
+v2rayng_encoded = base64.b64encode(
+    "\n".join(v2rayng_vless).encode("utf-8")
+).decode("ascii")
+
 write_lines(OUT / "GlobalPulse-Base64.txt", [encoded])
 write_lines(OUT / "GlobalPulse-Subscription.txt", [encoded])
+write_lines(OUT / "GlobalPulse-v2rayNG.txt", [v2rayng_encoded])
+
+write_lines(
+    OUT / "GlobalPulse-v2rayNG-SETUP.txt",
+    [
+        "GlobalPulse v2rayNG — curated local-test pool",
+        "",
+        "Subscription URL:",
+        "https://raw.githubusercontent.com/evgeniivolk831-ai/Vpn/main/output/GlobalPulse-v2rayNG.txt",
+        "",
+        f"Pool size target: {V2RAYNG_PUBLISHED_KEYS}",
+        "The feed is a curated subset of the E2E-verified pool, ranked by measured latency.",
+        "",
+        "Recommended v2rayNG settings:",
+        "1. Enable automatic subscription update.",
+        "2. Enable Auto test after updating subscription.",
+        "3. Enable Auto sort after testing.",
+        "4. Enable Auto delete invalid config after testing only if you accept removing failed profiles.",
+        "5. Create a Policy group from this subscription.",
+        "6. Use Least Ping / leastPing when available.",
+        "7. Enable Test outbounds.",
+        "8. Configure Fallback outbound when the installed v2rayNG version exposes it.",
+        "",
+        "The subscription cannot encode a client-local Policy group. Local testing remains the authoritative selection layer for the phone's current network.",
+    ],
+)
 
 write_lines(
     OUT / "GlobalPulse-Clash.yaml",
@@ -442,18 +480,22 @@ stats = {
     "e2e_tested_vless": e2e_tested,
     "e2e_verified_vless": e2e_passed,
     "published_keys_target": PUBLISHED_KEYS,
+    "v2rayng_published_keys_target": V2RAYNG_PUBLISHED_KEYS,
     "subscription": "output/GlobalPulse-Subscription.txt",
+    "v2rayng_subscription": "output/GlobalPulse-v2rayNG.txt",
+    "v2rayng_setup": "output/GlobalPulse-v2rayNG-SETUP.txt",
     "mihomo_subscription": "output/GlobalPulse-Subscription.yaml",
     "clash_convertible_vless": len(proxies),
     "published_all": len(all_top),
     "published_vless": len(vless),
+    "published_v2rayng": len(v2rayng_vless),
     "local_auto_selection": True,
     "local_healthcheck_interval_seconds": 180,
     "failover_interval_seconds": 120,
     "note": (
         "TCP reachability is a preliminary gate. Main subscription contains only E2E-verified VLESS/Reality/TCP nodes when E2E results are present. "
-        "from every ISP. Mihomo performs local HTTP health checks and "
-        "automatic failover from the user's network."
+        "Mihomo performs local HTTP health checks and automatic failover from the user's network. "
+        "v2rayNG feed is a smaller latency-ranked subset; v2rayNG local testing remains the final client-side selection layer."
     ),
 }
 
