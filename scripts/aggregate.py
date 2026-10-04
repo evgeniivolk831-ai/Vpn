@@ -11,7 +11,8 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output"
 OUT.mkdir(parents=True, exist_ok=True)
 
-MAX_VLESS = 120
+MAX_CANDIDATE_VLESS = 300
+PUBLISHED_KEYS = 120
 MAX_ALL = 200
 HEALTHCHECK_URL = "https://www.gstatic.com/generate_204"
 
@@ -270,10 +271,10 @@ for node in all_nodes:
 
 unique.sort(key=lambda item: (-protocol_score(item), canonical_key(item)))
 
-vless = [
+candidate_vless = [
     node for node in unique
     if node.lower().startswith("vless://")
-][:MAX_VLESS]
+][:MAX_CANDIDATE_VLESS]
 all_top = unique[:MAX_ALL]
 
 write_lines(OUT / "GlobalPulse-VLESS.txt", vless)
@@ -285,13 +286,17 @@ encoded = base64.b64encode(
 write_lines(OUT / "GlobalPulse-Base64.txt", [encoded])
 
 proxies = []
-for index, node in enumerate(vless, 1):
+vless = []
+for node in candidate_vless:
+    if len(proxies) >= PUBLISHED_KEYS:
+        break
     try:
-        proxy = vless_to_clash(node, index)
-        if proxy:
-            proxies.append(proxy)
+        proxy = vless_to_clash(node, len(proxies) + 1)
     except (ValueError, TypeError):
-        continue
+        proxy = None
+    if proxy:
+        proxies.append(proxy)
+        vless.append(node)
 
 write_lines(
     OUT / "GlobalPulse-Clash.yaml",
@@ -353,6 +358,7 @@ rules:
 """
 
 write_lines(OUT / "GlobalPulse-Auto-Clash.yaml", clash.rstrip("\n").splitlines())
+write_lines(OUT / "GlobalPulse-Subscription.yaml", clash.rstrip("\n").splitlines())
 
 stats = {
     "name": "GlobalPulse VLESS",
@@ -360,6 +366,9 @@ stats = {
     "sources": source_stats,
     "unique_nodes": len(unique),
     "vless_nodes": len(vless),
+    "candidate_vless": len(candidate_vless),
+    "published_keys_target": PUBLISHED_KEYS,
+    "subscription": "output/GlobalPulse-Subscription.yaml",
     "clash_convertible_vless": len(proxies),
     "published_all": len(all_top),
     "published_vless": len(vless),
