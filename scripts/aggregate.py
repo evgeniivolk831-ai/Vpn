@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
+# scripts/aggregate.py
 import base64
 import json
 import re
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -9,8 +11,10 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output"
 OUT.mkdir(parents=True, exist_ok=True)
 
-# Only feeds that publish configs after their own reachability/HTTP checks.
-# We intentionally do not treat an untested raw dump as "working".
+MAX_VLESS = 120
+MAX_ALL = 200
+HEALTHCHECK_URL = "https://www.gstatic.com/generate_204"
+
 SOURCES = [
     ("Au1rxx-verified", "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt", "base64"),
     ("0xRadikal-verified", "https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/verified/configs_base64.txt", "base64"),
@@ -20,50 +24,63 @@ SOURCES = [
 
 SCHEMES = (
     "vless://", "vmess://", "trojan://", "ss://", "ssr://",
-    "hysteria://", "hysteria2://", "tuic://", "wg://"
+    "hysteria://", "hysteria2://", "tuic://", "wg://",
 )
 
-def fetch(url: str) -> str:
-    req = urllib.request.Request(url, headers={"User-Agent": "GlobalPulse-VLESS/2.0"})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return r.read().decode("utf-8", "ignore")
 
-def decode_maybe_b64(s: str) -> str:
-    raw = s.strip()
+def fetch(url: str) -> str:
+    request = urllib.request.Request(
+        url,
+        headers={"User-Agent": "GlobalPulse/3.0"},
+    )
+    with urllib.request.urlopen(request, timeout=30) as response:
+        return response.read().decode("utf-8", "ignore")
+
+
+def decode_maybe_b64(value: str) -> str:
+    raw = value.strip()
     compact = re.sub(r"\s+", "", raw)
     for candidate in (raw, compact):
         if not candidate:
             continue
         try:
-            pad = "=" * (-len(candidate) % 4)
-            decoded = base64.b64decode(candidate + pad, validate=False).decode("utf-8", "ignore")
+            padded = candidate + "=" * (-len(candidate) % 4)
+            decoded = base64.b64decode(padded, validate=False).decode("utf-8", "ignore")
             if "://" in decoded:
                 return decoded
-        except Exception:
-            pass
+        except (ValueError, UnicodeError):
+            continue
     return raw
 
-def extract(text: str):
+
+def extract(text: str) -> list[str]:
     text = decode_maybe_b64(text)
-    found = []
+    found: list[str] = []
+
     for line in text.splitlines():
         line = line.strip()
         if not line:
             continue
+
         if line.lower().startswith(SCHEMES):
             found.append(line)
             continue
-        if not re.match(r"^[A-Za-z0-9+/=_-]{40,}$", line):
+
+        if not re.fullmatch(r"[A-Za-z0-9+/=_-]{40,}", line):
             continue
+
         decoded = decode_maybe_b64(line)
         for item in decoded.splitlines():
             item = item.strip()
             if item.lower().startswith(SCHEMES):
                 found.append(item)
+
     return found
 
-def canonical_key(uri: str):
+
+def canonical_key(uri: str) -> str:
     return uri.strip().split("#", 1)[0]
+
 
 def protocol_score(uri: str) -> int:
     low = uri.lower()
@@ -86,48 +103,201 @@ def protocol_score(uri: str) -> int:
         return 55
     return 0
 
-all_nodes = []
-source_stats = {}
 
-for name, url, kind in SOURCES:
+def vless_to_clash(uri: str, index: int) -> dict | None:
+    parsed = urllib.parse.urlparse(uri)
+    if (
+        parsed.scheme.lower() != "vless"
+        or not parsed.hostname
+        or not parsed.port
+        or not parsed.username
+    ):
+        return None
+
+    query = urllib.parse.parse_qs(parsed.query)
+
+    def one(name: str, default: str | None = None) -> str | None:
+        values = query.get(name)
+        return urllib.parse.unquote(values[0]) if values else default
+
+    proxy: dict = {
+        "name": f"GP-{index:03d}",
+        "type": "vless",
+        "server": parsed.hostname,
+        "port": parsed.port,
+        "uuid": urllib.parse.unquote(parsed.username),
+        "udp": True,
+    }
+
+    security = (one("security") or "").lower()
+    network = (one("type") or "tcp").lower()
+
+    if security != "none":
+        proxy["tls"] = True
+
+    if one("sni"):
+        proxy["servername"] = one("sni")
+
+    if one("fp"):
+        proxy["client-fingerprint"] = one("fp")
+
+    if security == "reality":
+        reality_opts = {}
+        if one("pbk"):
+            reality_opts["public-key"] = one("pbk")
+        if one("sid"):
+            reality_opts["short-id"] = one("sid")
+        if reality_opts:
+            proxy["reality-opts"] = reality_opts
+
+    if one("flow"):
+        proxy["flow"] = one("flow")
+
+    proxy["network"] = network
+
+    if network == "ws":
+        ws_opts = {"path": one("path") or "/"}
+        host = one("host")
+        if host:
+            ws_opts["headers"] = {"Host": host}
+        proxy["ws-opts"] = ws_opts
+
+    elif network == "h2":
+        h2_opts = {"path": one("path") or "/"}
+        host = one("host") or one("authority")
+        if host:
+            h2_opts["host"] = [host]
+        proxy["h2-opts"] = h2_opts
+
+    elif network == "grpc":
+        proxy["grpc-opts"] = {
+            "grpc-service-name": one("serviceName") or one("service_name") or ""
+        }
+
+    elif network == "http":
+        http_opts = {"path": [one("path") or "/"]}
+        host = one("host")
+        if host:
+            http_opts["headers"] = {"Host": [host]}
+        proxy["http-opts"] = http_opts
+
+    return proxy
+
+
+def yaml_scalar(value) -> str:
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    if isinstance(value, int):
+        return str(value)
+    return json.dumps(str(value), ensure_ascii=False)
+
+
+def emit_yaml(value, indent: int = 0) -> list[str]:
+    pad = " " * indent
+
+    if isinstance(value, dict):
+        lines = []
+        for key, item in value.items():
+            if isinstance(item, (dict, list)):
+                lines.append(f"{pad}{key}:")
+                lines.extend(emit_yaml(item, indent + 2))
+            else:
+                lines.append(f"{pad}{key}: {yaml_scalar(item)}")
+        return lines
+
+    if isinstance(value, list):
+        lines = []
+        for item in value:
+            if isinstance(item, dict):
+                first = True
+                for key, child in item.items():
+                    prefix = f"{pad}- " if first else f"{pad}  "
+                    if isinstance(child, (dict, list)):
+                        lines.append(f"{prefix}{key}:")
+                        lines.extend(emit_yaml(child, indent + 4))
+                    else:
+                        lines.append(f"{prefix}{key}: {yaml_scalar(child)}")
+                    first = False
+            else:
+                lines.append(f"{pad}- {yaml_scalar(item)}")
+        return lines
+
+    return [f"{pad}{yaml_scalar(value)}"]
+
+
+def write_lines(path: Path, lines: list[str]) -> None:
+    path.write_text(
+        "\n".join(lines) + ("\n" if lines else ""),
+        encoding="utf-8",
+    )
+
+
+all_nodes: list[str] = []
+source_stats: dict = {}
+
+for name, url, _kind in SOURCES:
     try:
         body = fetch(url)
         nodes = extract(body)
-        source_stats[name] = {"ok": True, "nodes": len(nodes), "url": url}
+        source_stats[name] = {
+            "ok": True,
+            "nodes": len(nodes),
+            "url": url,
+        }
         all_nodes.extend(nodes)
-    except Exception as e:
-        source_stats[name] = {"ok": False, "nodes": 0, "url": url, "error": str(e)[:240]}
+    except Exception as exc:
+        source_stats[name] = {
+            "ok": False,
+            "nodes": 0,
+            "url": url,
+            "error": str(exc)[:240],
+        }
 
-unique = []
-seen = set()
+unique: list[str] = []
+seen: set[str] = set()
+
 for node in all_nodes:
     key = canonical_key(node)
-    if key in seen:
-        continue
-    seen.add(key)
-    unique.append(node)
+    if key not in seen:
+        seen.add(key)
+        unique.append(node)
 
-# Prefer censorship-resilient transports and keep diversity across sources.
-unique.sort(key=lambda x: (-protocol_score(x), canonical_key(x)))
+unique.sort(key=lambda item: (-protocol_score(item), canonical_key(item)))
 
-vless = [x for x in unique if x.lower().startswith("vless://")][:150]
-all_top = unique[:200]
-
-def write_lines(path: Path, lines):
-    path.write_text("\n".join(lines) + ("\n" if lines else ""), encoding="utf-8")
+vless = [
+    node for node in unique
+    if node.lower().startswith("vless://")
+][:MAX_VLESS]
+all_top = unique[:MAX_ALL]
 
 write_lines(OUT / "GlobalPulse-VLESS.txt", vless)
 write_lines(OUT / "GlobalPulse-All.txt", all_top)
 
-payload = "\n".join(all_top)
-encoded = base64.b64encode(payload.encode()).decode()
+encoded = base64.b64encode(
+    "\n".join(all_top).encode("utf-8")
+).decode("ascii")
 write_lines(OUT / "GlobalPulse-Base64.txt", [encoded])
 
-# Clash Meta/Mihomo: local auto-selection. The client itself tests nodes
-# from the user's network, which is stronger evidence for censorship reachability
-# than a CI runner in another country.
-repo_base = "https://raw.githubusercontent.com/evgeniivolk831-ai/Vpn/main/output/GlobalPulse-Base64.txt"
-clash = f'''mixed-port: 7890
+proxies = []
+for index, node in enumerate(vless, 1):
+    try:
+        proxy = vless_to_clash(node, index)
+        if proxy:
+            proxies.append(proxy)
+    except (ValueError, TypeError):
+        continue
+
+write_lines(
+    OUT / "GlobalPulse-Clash.yaml",
+    ["proxies:", *emit_yaml(proxies, 2)],
+)
+
+provider_url = (
+    "https://raw.githubusercontent.com/"
+    "evgeniivolk831-ai/Vpn/main/output/GlobalPulse-Clash.yaml"
+)
+
+clash = f"""mixed-port: 7890
 mode: rule
 allow-lan: false
 log-level: warning
@@ -135,12 +305,12 @@ log-level: warning
 proxy-providers:
   GlobalPulse:
     type: http
-    url: "{repo_base}"
+    url: "{provider_url}"
     interval: 900
-    path: ./providers/globalpulse.txt
+    path: ./providers/globalpulse.yaml
     health-check:
       enable: true
-      url: https://www.gstatic.com/generate_204
+      url: {HEALTHCHECK_URL}
       interval: 180
       timeout: 5000
       lazy: false
@@ -150,7 +320,7 @@ proxy-groups:
     type: url-test
     use:
       - GlobalPulse
-    url: https://www.gstatic.com/generate_204
+    url: {HEALTHCHECK_URL}
     interval: 180
     tolerance: 80
     lazy: false
@@ -159,10 +329,11 @@ proxy-groups:
     type: fallback
     use:
       - GlobalPulse
-    url: https://www.gstatic.com/generate_204
+    url: {HEALTHCHECK_URL}
     interval: 120
     timeout: 5000
     lazy: false
+    max-failed-times: 2
 
   - name: "PROXY"
     type: select
@@ -173,7 +344,8 @@ proxy-groups:
 
 rules:
   - MATCH,PROXY
-'''
+"""
+
 write_lines(OUT / "GlobalPulse-Auto-Clash.yaml", clash.rstrip("\n").splitlines())
 
 stats = {
@@ -182,11 +354,22 @@ stats = {
     "sources": source_stats,
     "unique_nodes": len(unique),
     "vless_nodes": len(vless),
+    "clash_convertible_vless": len(proxies),
     "published_all": len(all_top),
     "published_vless": len(vless),
     "local_auto_selection": True,
     "local_healthcheck_interval_seconds": 180,
-    "note": "Upstream CI verification cannot prove reachability from every ISP. The generated Clash/Mihomo profile re-tests nodes from the user's network and auto-selects a live one."
+    "failover_interval_seconds": 120,
+    "note": (
+        "Upstream source verification is not equivalent to reachability "
+        "from every ISP. Mihomo performs local HTTP health checks and "
+        "automatic failover from the user's network."
+    ),
 }
-(OUT / "stats.json").write_text(json.dumps(stats, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+(OUT / "stats.json").write_text(
+    json.dumps(stats, ensure_ascii=False, indent=2) + "\n",
+    encoding="utf-8",
+)
+
 print(json.dumps(stats, ensure_ascii=False, indent=2))
