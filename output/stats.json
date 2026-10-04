@@ -25,7 +25,7 @@
   },
   "unique_nodes": 4690,
   "vless_nodes": 120,
-  "clash_convertible_vless": 120,
+  "clash_convertible_vless": 95,
   "published_all": 200,
   "published_vless": 120,
   "local_auto_selection": true,

@@ -1,183 +1,4 @@
 proxies:
-  - name: "GP-001"
-    type: "vless"
-    server: "ru19.aimodelhub.top"
-    port: 443
-    uuid: "13ef8e97-815a-000b-8688-0154d85d26bf"
-    udp: true
-    tls: true
-    servername: "ru19.aimodelhub.top"
-    client-fingerprint: "random"
-    reality-opts:
-      public-key: "Fe5PnOaERhhHbBXhGBEsQaRUBpSM8hCc03zOEpHz218"
-      short-id: "51b784e13468"
-    network: "xhttp"
-  - name: "GP-002"
-    type: "vless"
-    server: "13.143.185.29"
-    port: 8448
-    uuid: "2897717e-55b6-4d3d-8752-72c5fd4614ae"
-    udp: true
-    tls: true
-    servername: "api-maps.yandex.ru"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "SEFnqOIUiHZpOgtXZ3FFFhVTALc1ReEVt78femI770U"
-      short-id: "c90743ca346c8da7"
-    network: "xhttp"
-  - name: "GP-003"
-    type: "vless"
-    server: "s958.wagahaha.xyz"
-    port: 443
-    uuid: "5d02517f-63d5-3e9f-b467-1bcf4d4e25d3"
-    udp: true
-    tls: true
-    servername: "a29466d1s98.gogocs.xyz"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "onZAYhiTdAstxmlCt89CCYsuwIJg0HtI83FVyAMf0WY"
-      short-id: "f60bc53a"
-    network: "xhttp"
-  - name: "GP-004"
-    type: "vless"
-    server: "95.85.252.205"
-    port: 8443
-    uuid: "5ff52caa-c674-4eac-a8d2-7c846576b005"
-    udp: true
-    tls: true
-    servername: "www.samsung.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "S09Ije3DJnv5FxUEn8nr3sURQFlG3EWhmIODR1ZYmGc"
-      short-id: "975dd788251264ef"
-    network: "xhttp"
-  - name: "GP-005"
-    type: "vless"
-    server: "ro-xh02.tcp-reset-club.net"
-    port: 8443
-    uuid: "721bacfe-ff09-4e63-a735-686015bc1351"
-    udp: true
-    tls: true
-    servername: "s3.netavex.com"
-    reality-opts:
-      public-key: "Gu_QdtOX6E8pZcYvDWgHKA5dxcit7hrpU27sizCEWXg"
-      short-id: "e0"
-    network: "xhttp"
-  - name: "GP-006"
-    type: "vless"
-    server: "185.90.61.12"
-    port: 443
-    uuid: "8ee2927b-1be9-404d-9b96-61dcc51bbd37"
-    udp: true
-    tls: true
-    servername: "sberbank.ru"
-    client-fingerprint: "safari"
-    reality-opts:
-      public-key: "PlP5L4lWEh_9h53_U-5kqwzl4C-eCrJoA6BF74cdfk8"
-      short-id: "4164bb3d830b817f"
-    network: "xhttp"
-  - name: "GP-007"
-    type: "vless"
-    server: "37.18.14.168"
-    port: 10654
-    uuid: "953358cb-82ba-4296-960d-6d2ec3468f4c"
-    udp: true
-    tls: true
-    servername: "bl3fk52.sysopnova.art"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "ds10ztOlMn8xfeIKEQ1m3I-tdem-abZbHKtJCU13CQM"
-      short-id: "5c3fb122"
-    network: "xhttp"
-  - name: "GP-008"
-    type: "vless"
-    server: "itga8.guardora.pro"
-    port: 10654
-    uuid: "953358cb-82ba-4296-960d-6d2ec3468f4c"
-    udp: true
-    tls: true
-    servername: "bl3fk52.sysopnova.art"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "ds10ztOlMn8xfeIKEQ1m3I-tdem-abZbHKtJCU13CQM"
-      short-id: "5c3fb122"
-    network: "xhttp"
-  - name: "GP-009"
-    type: "vless"
-    server: "itga8.guardora.pro"
-    port: 10654
-    uuid: "953358cb-82ba-4296-960d-6d2ec3468f4c"
-    udp: true
-    tls: true
-    servername: "dailycanvas.sysopnova.art"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "lGKKIZsN9yBMxzZm8yl7nzNwJII18c_wLd_AbzzvRD8"
-      short-id: "53361376"
-    network: "xhttp"
-  - name: "GP-010"
-    type: "vless"
-    server: "yamabiko.proxy.rlwy.net"
-    port: 47925
-    uuid: "Telegramjoin"
-    udp: true
-    tls: true
-    servername: "is1-ssl.mzstatic.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "xgTTIieq7ylLXTDNgyYnAshRAPXRw1O9iqC-E7Ad2Uc"
-      short-id: "3f"
-    network: "xhttp"
-  - name: "GP-011"
-    type: "vless"
-    server: "94.156.122.251"
-    port: 443
-    uuid: "ca428a2e-7f82-4030-851b-cab731a5645a"
-    udp: true
-    tls: true
-    servername: "yandex.by"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "F2MKDw5CCtP1oXIej2EgNxB01k3eyNu7tKCFfucgnRA"
-    network: "xhttp"
-  - name: "GP-012"
-    type: "vless"
-    server: "l10.l-itx.info"
-    port: 443
-    uuid: "ca428a2e-7f82-4030-851b-cab731a5645a"
-    udp: true
-    tls: true
-    servername: "yandex.by"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "F2MKDw5CCtP1oXIej2EgNxB01k3eyNu7tKCFfucgnRA"
-    network: "xhttp"
-  - name: "GP-013"
-    type: "vless"
-    server: "31.172.79.217"
-    port: 4443
-    uuid: "e0bd9dfa-0cf9-47c0-92ac-7dba08ebcff8"
-    udp: true
-    tls: true
-    servername: "www.cloudflare.com"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "8cr592XHsE4oen8nFqeFqL00vUDA8eUI17RTUNyizDw"
-      short-id: "542c92a0a53608f2"
-    network: "xhttp"
-  - name: "GP-014"
-    type: "vless"
-    server: "2.28.142.170"
-    port: 443
-    uuid: "f774f037-6320-42e3-a97b-6d4a1f018dd5"
-    udp: true
-    tls: true
-    servername: "germanytest.tulnaro.ir"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "IqFTx4k5VQydmffvavaOHDXBtdgDxX26A6NtsVvDfhw"
-      short-id: "d485c3d5248d6b51"
-    network: "xhttp"
   - name: "GP-015"
     type: "vless"
     server: "167.17.69.171"
@@ -218,7 +39,7 @@ proxies:
       public-key: "ALT8hIGeZEhi0sQFbXP_ntBg8Xo-v7i0YCLrqTnBxRk"
       short-id: "0990d22f"
     flow: "xtls-rprx-vision"
-    network: "tcp?type=tcp"
+    network: "tcp"
   - name: "GP-018"
     type: "vless"
     server: "34.29.203.135"
@@ -313,19 +134,6 @@ proxies:
       short-id: "fa3ea655619a3e78"
     flow: "xtls-rprx-vision"
     network: "tcp"
-  - name: "GP-025"
-    type: "vless"
-    server: "47.253.226.114"
-    port: 443
-    uuid: "055a1ce8-2a16-4a0d-a2c2-22826c9b2413"
-    udp: true
-    tls: true
-    servername: "www.cloudflare.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "Svl81isn16RPAFnjtmYw7A6TPnsEPLHuYYaJht65Rzc"
-    flow: "xtls-rprx-vision"
-    network: "raw"
   - name: "GP-026"
     type: "vless"
     server: "178.105.168.171"
@@ -443,19 +251,6 @@ proxies:
       public-key: "OvEpExEu-A6ZRSO1BddxIrQVCvLNcHCVlVpb8Gxzcxs"
       short-id: "cacf9459"
     network: "tcp"
-  - name: "GP-035"
-    type: "vless"
-    server: "23.191.200.207"
-    port: 443
-    uuid: "09a0a4a4-81b8-4261-a23c-424ab42f48f5"
-    udp: true
-    tls: true
-    servername: "dl.google.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "7j3hmlHrEDk3Kjx-dFG3E3jf0c6PZF45trIPFsuKWmI"
-    flow: "xtls-rprx-vision"
-    network: "raw"
   - name: "GP-036"
     type: "vless"
     server: "23.191.200.207"
@@ -482,20 +277,6 @@ proxies:
       public-key: "Ti7zRkfweHdrQ5QHI9o_zEgHn39xRfMG2C2Gfp_AMHE"
       short-id: "8380ad05cd21a69f"
     network: "tcp"
-  - name: "GP-038"
-    type: "vless"
-    server: "46.8.209.224"
-    port: 443
-    uuid: "0c572c2d-d251-4e61-846e-d0efe472d7d0"
-    udp: true
-    tls: true
-    servername: "www.vk.com"
-    client-fingerprint: "qq"
-    reality-opts:
-      public-key: "ZlXBEYDy1NPe1mLvq7j8CCB9fBIaIvc8X3UZsbVxNT8"
-      short-id: "ae03e6ef452252e0"
-    flow: "xtls-rprx-vision"
-    network: "raw"
   - name: "GP-039"
     type: "vless"
     server: "23.191.200.206"
@@ -563,34 +344,6 @@ proxies:
       short-id: "f716fd72"
     flow: "xtls-rprx-vision"
     network: "tcp"
-  - name: "GP-044"
-    type: "vless"
-    server: "107.181.151.241"
-    port: 443
-    uuid: "106d20f6-d70a-40e2-b69b-8e82baf8d117"
-    udp: true
-    tls: true
-    servername: "www.microsoft.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "FjcEZNQ8t5E4R04_11T6ghsOutdqwKKrelkuadakoQg"
-      short-id: "60500a63ad12"
-    flow: "xtls-rprx-vision"
-    network: "raw"
-  - name: "GP-045"
-    type: "vless"
-    server: "staging.lastilhame.monster"
-    port: 443
-    uuid: "106d20f6-d70a-40e2-b69b-8e82baf8d117"
-    udp: true
-    tls: true
-    servername: "www.microsoft.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "FjcEZNQ8t5E4R04_11T6ghsOutdqwKKrelkuadakoQg"
-      short-id: "60500a63ad12"
-    flow: "xtls-rprx-vision"
-    network: "raw"
   - name: "GP-046"
     type: "vless"
     server: "154.12.38.159"
@@ -662,19 +415,6 @@ proxies:
       short-id: "456d3503eda9fa6f"
     flow: "xtls-rprx-vision"
     network: "tcp"
-  - name: "GP-051"
-    type: "vless"
-    server: "159.89.87.21"
-    port: 28190
-    uuid: "14c80e0e-f7ce-4991-94fc-99a1db4a9b1e"
-    udp: true
-    tls: true
-    servername: "aws.amazon.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "ZJRnFU-1s1JOnO8E9uZ7b00l1fPEh63fGRbdBANFRno"
-    flow: "xtls-rprx-vision"
-    network: "raw"
   - name: "GP-052"
     type: "vless"
     server: "159.89.87.21"
@@ -766,32 +506,6 @@ proxies:
       public-key: "ZJRnFU-1s1JOnO8E9uZ7b00l1fPEh63fGRbdBANFRno"
     flow: "xtls-rprx-vision"
     network: "tcp"
-  - name: "GP-059"
-    type: "vless"
-    server: "159.89.87.21"
-    port: 28190
-    uuid: "14c80e0e-f7ce-4991-94fc-99a1db4a9b1e"
-    udp: true
-    tls: true
-    servername: "aws.amazon.com"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "ZJRnFU-1s1JOnO8E9uZ7b00l1fPEh63fGRbdBANFRno"
-    flow: "xtls-rprx-vision"
-    network: "raw"
-  - name: "GP-060"
-    type: "vless"
-    server: "159.89.87.21"
-    port: 28190
-    uuid: "14c80e0e-f7ce-4991-94fc-99a1db4a9b1e"
-    udp: true
-    tls: true
-    servername: "aws.amazon.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "ZJRnFU-1s1JOnO8E9uZ7b00l1fPEh63fGRbdBANFRno"
-    flow: "xtls-rprx-vision"
-    network: "raw"
   - name: "GP-061"
     type: "vless"
     server: "45.32.69.110"
@@ -865,20 +579,6 @@ proxies:
       short-id: "6c825bc79850"
     flow: "xtls-rprx-vision"
     network: "tcp"
-  - name: "GP-066"
-    type: "vless"
-    server: "server.slavkiti.monster"
-    port: 443
-    uuid: "1896c6c9-a941-4688-a865-29027bf7f8e6"
-    udp: true
-    tls: true
-    servername: "www.microsoft.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "J-dv-HrWfQ_IOoyutv0Kg-rO8QwoRwc02dS1dS_tblk"
-      short-id: "6c825bc79850"
-    flow: "xtls-rprx-vision"
-    network: "raw"
   - name: "GP-067"
     type: "vless"
     server: "45.131.212.231"
@@ -1176,19 +876,6 @@ proxies:
       public-key: "PuAGLfJy6cu1TNoHuKIKSxPetCbZI41fc8hQDjWPIAU"
       short-id: "9980e0609b0d3891"
     network: "tcp"
-  - name: "GP-089"
-    type: "vless"
-    server: "194.61.31.126"
-    port: 2053
-    uuid: "1d4e18bd-1f26-4915-b35a-7ace4826e76a"
-    udp: true
-    tls: true
-    servername: "www.apple.com"
-    client-fingerprint: "firefox"
-    reality-opts:
-      public-key: "PuAGLfJy6cu1TNoHuKIKSxPetCbZI41fc8hQDjWPIAU"
-      short-id: "9980e0609b0d3891"
-    network: "raw"
   - name: "GP-090"
     type: "vless"
     server: "194.61.31.126"
@@ -1267,20 +954,6 @@ proxies:
       short-id: "a3a578ab"
     flow: "xtls-rprx-vision"
     network: "tcp"
-  - name: "GP-096"
-    type: "vless"
-    server: "185.95.231.156"
-    port: 443
-    uuid: "1f8cf47a-b66a-4916-979f-26edfcf44eea"
-    udp: true
-    tls: true
-    servername: "www.apple.com"
-    client-fingerprint: "chrome"
-    reality-opts:
-      public-key: "8eXftARun6KH38UZhuqIfPR1VF2DLS9RMBZEnF5k6To"
-      short-id: "a3a578ab"
-    flow: "xtls-rprx-vision"
-    network: "raw"
   - name: "GP-097"
     type: "vless"
     server: "185.95.231.156"
